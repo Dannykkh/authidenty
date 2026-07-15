@@ -8,6 +8,9 @@ out/
 # Production output
 build/
 
+# Local application data
+.data/
+
 # Local environment files
 .env*
 !.env.example

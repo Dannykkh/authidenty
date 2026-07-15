@@ -1,0 +1,16 @@
+You are a senior software architect and security reviewer reviewing an implementation plan for a passkey account-recovery hackathon prototype.
+
+Read:
+- docs/plan/authidenty-hackathon/plan.md
+- docs/plan/authidenty-hackathon/spec.md
+- docs/plan/authidenty-hackathon/team-review.md
+
+Identify:
+- potential footguns and edge cases;
+- missing considerations;
+- authentication, recovery, secret-handling, model, and deployment vulnerabilities;
+- unrealistic schedule assumptions;
+- unclear or ambiguous requirements;
+- work that should be cut or reordered.
+
+Be specific and actionable. Reference plan sections. Return at most 12 findings ordered by severity, followed by a concise verdict and the three most important plan changes. Do not edit project files.

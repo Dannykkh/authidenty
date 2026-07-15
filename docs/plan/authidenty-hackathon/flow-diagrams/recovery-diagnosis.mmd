@@ -1,0 +1,21 @@
+flowchart TD
+    RecoveryStart([Choose recovery after sign-in failure]) --> FailureInput[Submit username and allow-listed failure code]
+    FailureInput --> StartTransaction[Create short-lived Recovery Transaction]
+    StartTransaction --> ComputePolicy[Compute complete allowed Recovery Actions]
+    ComputePolicy --> AnotherPasskey{Another passkey path allowed?}
+    AnotherPasskey -- Yes --> PreferAuthentication[Recommend normal Authentication first]
+    AnotherPasskey -- No --> FactorConfigured{Recovery Code configured?}
+    FactorConfigured -- No --> NoSelfService[Explain self-service is unavailable]
+    FactorConfigured -- Yes --> CollectDescription[Collect bounded non-secret description]
+    CollectDescription --> SecretLike{Secret-like content detected?}
+    SecretLike -- Yes --> RejectSecret[Do not send; direct to Security Authorization]
+    SecretLike -- No --> CallModel[Call GPT-5.6 with policy projection]
+    CallModel --> ModelValid{Schema and semantic output valid?}
+    ModelValid -- No --> DeterministicFallback[Use deterministic explanation]
+    ModelValid -- Yes --> IntersectActions[Intersect output with server action set]
+    IntersectActions --> ShowGuidance[Show diagnosis and explicit security boundary]
+    DeterministicFallback --> ShowGuidance
+    RejectSecret --> ShowGuidance
+    PreferAuthentication --> ShowGuidance
+    NoSelfService --> TerminalNoBypass([Stop without authorization])
+    ShowGuidance --> FactorRequired([Proceed only to a server-approved action])

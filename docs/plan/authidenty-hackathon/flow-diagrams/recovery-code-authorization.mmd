@@ -1,0 +1,20 @@
+flowchart TD
+    CodeSubmit([Submit Recovery Code outside chat]) --> TransactionCheck{Recovery Transaction valid?}
+    TransactionCheck -- No --> RestartRecovery[Require a new recovery transaction]
+    TransactionCheck -- Yes --> ThrottleCheck{Attempt allowed?}
+    ThrottleCheck -- No --> Throttled[Return bounded retry time]
+    ThrottleCheck -- Yes --> DigestCandidate[Normalize and digest candidate]
+    DigestCandidate --> CodeMatch{Active code matches account?}
+    CodeMatch -- No --> RecordFailure[Increment throttle state]
+    RecordFailure --> GenericReject[Return generic rejection]
+    CodeMatch -- Yes --> BeginImmediate[Begin immediate database transaction]
+    BeginImmediate --> ReservationAvailable{Code still active and unreserved?}
+    ReservationAvailable -- No --> RollbackConflict[Rollback and reject replay]
+    ReservationAvailable -- Yes --> ReserveCode[Reserve code to Recovery Transaction]
+    ReserveCode --> CreateGrant[Create one purpose-bound Re-enrollment Grant]
+    CreateGrant --> CommitAuthorization[Commit reservation and grant]
+    CommitAuthorization --> SetGrantCookie[Set Re-enrollment Grant cookie]
+    SetGrantCookie --> GrantIssued([Replacement enrollment authorized])
+    Throttled --> CodeSubmit
+    GenericReject --> CodeSubmit
+    RollbackConflict --> RestartRecovery

@@ -1,0 +1,21 @@
+flowchart TD
+    GrantCheck([Request replacement options]) --> GrantValid{Grant active and purpose-bound?}
+    GrantValid -- No --> ReenrollReject[Reject without account changes]
+    GrantValid -- Yes --> ReplacementPrompt[Create grant-bound challenge and run passkey prompt]
+    ReplacementPrompt --> ReplacementValid{Attestation and challenge valid?}
+    ReplacementValid -- No --> KeepOriginalState[Keep credentials and code unchanged]
+    KeepOriginalState -->|Retry while authorization remains valid| ReplacementPrompt
+    ReplacementValid -- Yes --> BeginCompletion[Begin immediate completion transaction]
+    BeginCompletion --> RecheckState{Grant, transaction, code, and user still match?}
+    RecheckState -- No --> RollbackCompletion[Rollback every change]
+    RecheckState -- Yes --> InsertReplacement[Insert active replacement credential]
+    InsertReplacement --> ConsumeGrant[Consume grant and complete transaction]
+    ConsumeGrant --> RevokeLost[Revoke reported lost credential]
+    RevokeLost --> RedeemAndRotate[Redeem old code and store new code digest]
+    RedeemAndRotate --> WriteNotifications[Write recovery notification outbox]
+    WriteNotifications --> CommitCompletion[Commit all state changes]
+    CommitCompletion --> CompletionReceipt[Return statuses and new code once]
+    CompletionReceipt --> ReplacementSignIn[Run normal passkey Authentication]
+    ReplacementSignIn --> ReplacementWorks{Replacement assertion valid?}
+    ReplacementWorks -- Yes --> RecoveryProven([Recovery complete and signed in])
+    ReplacementWorks -- No --> PostRecoveryFailure[Show generic sign-in failure]

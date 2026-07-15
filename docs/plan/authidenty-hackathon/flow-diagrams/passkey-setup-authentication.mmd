@@ -1,0 +1,20 @@
+flowchart TD
+    SetupStart([Open setup]) --> ProfileInput[Enter profile and request registration options]
+    ProfileInput --> ProfileValid{Profile and account valid?}
+    ProfileValid -- No --> SetupError[Show safe setup error]
+    ProfileValid -- Yes --> RegisterPrompt[Run platform passkey prompt]
+    RegisterPrompt --> AttestationValid{Attestation valid?}
+    AttestationValid -- No --> SetupRetry[Clear ceremony and offer retry]
+    AttestationValid -- Yes --> PersistInitial[Store active public credential]
+    PersistInitial --> IssueRecoveryCode[Store digest and return code once]
+    IssueRecoveryCode --> AcknowledgeCode[Copy or download and acknowledge]
+    AcknowledgeCode --> PasskeySetupComplete([Setup complete])
+
+    AuthStart([Open sign in]) --> UsernameInput[Enter username]
+    UsernameInput --> AuthOptions[Request authentication options]
+    AuthOptions --> AuthPrompt[Run passkey assertion prompt]
+    AuthPrompt --> AssertionValid{Active credential and assertion valid?}
+    AssertionValid -- No --> AuthFailure[Generic failure with retry or recovery]
+    AssertionValid -- Yes --> UpdateCredentialUse[Consume challenge and update credential use]
+    UpdateCredentialUse --> IssueSession[Issue Application Session]
+    IssueSession --> Authenticated([Signed in])

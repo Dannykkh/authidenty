@@ -2,6 +2,7 @@ import Database from "better-sqlite3";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, test } from "vitest";
+import { openDatabase } from "./database";
 
 const migrationDirectory = join(process.cwd(), "src", "server", "db", "migrations");
 
@@ -112,6 +113,92 @@ describe("initial SQLite migration", () => {
       database.exec(readMigration("down"));
 
       expect(tableNames(database)).toEqual([]);
+    } finally {
+      database.close();
+    }
+  });
+});
+
+describe("private identity relay migration", () => {
+  test("creates separate relay, vault, challenge, outbox, and receipt tables", () => {
+    const database = openDatabase(":memory:");
+
+    try {
+      expect(tableNames(database)).toEqual([
+        "identity_vault_entries",
+        "passkey_credentials",
+        "relay_challenges",
+        "relay_notification_outbox",
+        "relay_profiles",
+        "relay_requests",
+        "users",
+        "verification_receipts",
+        "webauthn_challenges",
+      ]);
+      expect(columnNames(database, "identity_vault_entries")).toEqual([
+        "user_id",
+        "phone_ciphertext",
+        "phone_iv",
+        "phone_auth_tag",
+        "key_version",
+        "created_at",
+        "updated_at",
+      ]);
+      expect(columnNames(database, "relay_profiles")).toEqual([
+        "user_id",
+        "relay_handle",
+        "subject_id",
+        "status",
+        "created_at",
+        "updated_at",
+      ]);
+      expect(columnNames(database, "relay_requests")).toEqual([
+        "id",
+        "user_id",
+        "relying_service",
+        "summary",
+        "purpose",
+        "declared_risk",
+        "model_risk",
+        "final_risk",
+        "factor",
+        "status",
+        "created_at",
+        "updated_at",
+        "expires_at",
+        "verified_at",
+      ]);
+      expect(columnNames(database, "relay_challenges")).toEqual([
+        "request_id",
+        "code_digest",
+        "attempt_count",
+        "max_attempts",
+        "created_at",
+        "updated_at",
+        "expires_at",
+        "consumed_at",
+      ]);
+      expect(columnNames(database, "relay_notification_outbox")).toEqual([
+        "id",
+        "request_id",
+        "channel",
+        "masked_destination",
+        "status",
+        "created_at",
+        "updated_at",
+        "delivered_at",
+      ]);
+      expect(columnNames(database, "verification_receipts")).toEqual([
+        "id",
+        "request_id",
+        "subject_id",
+        "purpose",
+        "risk",
+        "factor",
+        "created_at",
+        "updated_at",
+        "expires_at",
+      ]);
     } finally {
       database.close();
     }

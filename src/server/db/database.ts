@@ -2,16 +2,27 @@ import Database from "better-sqlite3";
 import { mkdirSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 
-const latestSchemaVersion = 1;
+const migrations = [
+  { version: 1, name: "initial" },
+  { version: 2, name: "private_identity_relay" },
+] as const;
+
+const latestSchemaVersion = migrations.at(-1)?.version ?? 0;
 
 function migrationPath(version: number, direction: "up" | "down") {
+  const migration = migrations.find((candidate) => candidate.version === version);
+
+  if (!migration) {
+    throw new Error(`Database migration ${version} is not registered.`);
+  }
+
   return join(
     process.cwd(),
     "src",
     "server",
     "db",
     "migrations",
-    `${String(version).padStart(3, "0")}_initial.${direction}.sql`,
+    `${String(version).padStart(3, "0")}_${migration.name}.${direction}.sql`,
   );
 }
 

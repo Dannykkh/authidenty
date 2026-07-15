@@ -7,6 +7,7 @@ import {
 } from "@simplewebauthn/browser";
 import type { PublicKeyCredentialCreationOptionsJSON } from "@simplewebauthn/browser";
 import { useState, useSyncExternalStore, type FormEvent } from "react";
+import { RecoveryAgent } from "@/features/recovery/components/recovery-agent";
 
 type Phase =
   | "checking"
@@ -65,6 +66,7 @@ function explainRegistrationError(error: unknown) {
 }
 
 export function PasskeyRegistration() {
+  const [showRecovery, setShowRecovery] = useState(false);
   const [phase, setPhase] = useState<Phase>("ready");
   const [errorMessage, setErrorMessage] = useState("");
   const [registeredUsername, setRegisteredUsername] = useState("");
@@ -116,6 +118,10 @@ export function PasskeyRegistration() {
       setErrorMessage(explainRegistrationError(error));
       setPhase("error");
     }
+  }
+
+  if (showRecovery) {
+    return <RecoveryAgent onBack={() => setShowRecovery(false)} />;
   }
 
   if (phase === "success") {
@@ -219,6 +225,14 @@ export function PasskeyRegistration() {
           </p>
         )}
       </div>
+
+      <button
+        className="mt-2 inline-flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.13em] text-ink/55 underline decoration-ink/25 underline-offset-4 transition-colors hover:text-signal focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-signal"
+        type="button"
+        onClick={() => setShowRecovery(true)}
+      >
+        Lost a device or cannot sign in?
+      </button>
     </aside>
   );
 }

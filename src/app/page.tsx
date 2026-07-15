@@ -29,7 +29,7 @@ export default function Home() {
           <h1 className="font-display text-[clamp(4rem,10vw,9rem)] leading-[0.82] font-medium tracking-[-0.075em] text-balance">
             Sign in.
             <br />
-            <span className="font-normal italic text-signal">Stay human.</span>
+            <span className="font-normal italic text-signal">Stay in control.</span>
           </h1>
 
           <div className="mt-10 grid max-w-3xl gap-7 border-t border-ink/20 pt-7 sm:grid-cols-[1fr_auto] sm:items-end">
@@ -39,7 +39,7 @@ export default function Home() {
               way back in.
             </p>
             <span className="inline-flex w-fit items-center gap-2 border border-ink bg-ink px-4 py-3 font-mono text-[0.68rem] uppercase tracking-[0.16em] text-paper">
-              Passkey registration is live
+              Passkeys + recovery guidance live
               <svg aria-hidden="true" viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-none stroke-current">
                 <path d="M3 8h10M9 4l4 4-4 4" strokeWidth="1.5" />
               </svg>

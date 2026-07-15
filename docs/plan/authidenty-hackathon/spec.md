@@ -1,5 +1,7 @@
 # Feature Spec: Authidenty Hackathon Completion
 
+> Superseded on 2026-07-16 by [relay-mvp.md](relay-mvp.md). Retained as historical planning evidence for the original recovery-focused direction.
+
 Status: Ready for detailed design
 Date: 2026-07-15
 

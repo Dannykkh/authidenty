@@ -2,10 +2,66 @@
 
 Created: 2026-07-15
 Domain: account authentication and recovery
-Version: v3 final
+Version: v4 private identity relay
 Audience: product, engineering, security, and hackathon reviewers
 
 ## Core Terms
+
+### Private Identity Relay
+
+- Definition: the Authidenty boundary that accepts a pseudonymous approval request, privately routes a challenge to an enrolled account holder, and returns a minimal verification result without disclosing the contact destination.
+- Identifier: `privateIdentityRelay`, shortened to `relay` inside the feature module.
+- UI: “private approval relay” or “Authidenty relay.”
+- Avoid: “AI identity proof,” “anonymous SMS,” or “zero-knowledge identity.”
+
+### Relying Service
+
+- Definition: the application or AI agent that asks Authidenty to obtain account-holder approval for a bounded action.
+- Identifier: `relyingService`.
+- UI: the verified service display name.
+- Avoid: `client` where it could mean a browser or HTTP library.
+
+### Relay Handle
+
+- Definition: an opaque, non-PII identifier issued for one account and presented by a Relying Service to select that account's relay profile.
+- Identifier: `relayHandle`.
+- UI: normally hidden or shortened.
+- Avoid: email, phone number, username, or conversation embedding as the relay handle.
+
+### Identity Vault
+
+- Definition: the isolated persistence and cryptographic boundary that stores encrypted contact destinations and exposes them only to a Notification Adapter for a policy-approved request.
+- Identifier: `identityVault`.
+- UI: “private contact vault.”
+- Avoid: implying that GPT can query or decrypt it.
+
+### Approval Request
+
+- Definition: a bounded Relying Service request asking an enrolled account holder to approve one described action.
+- Identifier: `approvalRequest`, with `relayRequest` accepted in persistence and routes.
+- UI: “approval request.”
+- Avoid: “login” when the request concerns a payment, deletion, deployment, or account change.
+
+### Action Risk Classification
+
+- Definition: GPT-5.6's typed, PII-free interpretation of an action's purpose and suggested risk; deterministic policy computes the final risk and required factor.
+- Identifier: `actionRiskClassification`.
+- UI: “request summary.”
+- Avoid: “AI security decision” or “AI authorization.”
+
+### Device Challenge
+
+- Definition: a short-lived proof routed to a previously enrolled device or destination and verified outside GPT.
+- Identifier: `deviceChallenge`.
+- UI: the concrete method, such as “text message code” or “passkey approval.”
+- Avoid: calling delivery itself successful authentication.
+
+### Verification Receipt
+
+- Definition: a short-lived, pseudonymous record that a configured account-control challenge succeeded for one Approval Request.
+- Identifier: `verificationReceipt`.
+- UI: “verified approval receipt.”
+- Avoid: claiming that it proves legal identity or arbitrary personal attributes.
 
 ### Account Holder
 
@@ -158,6 +214,12 @@ Audience: product, engineering, security, and hackathon reviewers
 
 ```mermaid
 flowchart LR
+    RS[Relying Service] --> AR[Approval Request]
+    AR --> ARC[Action Risk Classification]
+    ARC --> PIR[Private Identity Relay]
+    PIR --> IV[Identity Vault]
+    IV --> DC[Device Challenge]
+    DC --> VR[Verification Receipt]
     AH[Account Holder] --> A[Authenticator]
     A --> PC[Passkey Credential]
     PC --> AU[Authentication]
@@ -184,6 +246,9 @@ flowchart LR
 
 | Avoid | Use instead | Reason |
 |---|---|---|
+| LLM identifies the person | GPT classifies the approval request | The model does not authenticate or inspect PII |
+| GPT unlocks the phone number | Server policy authorizes private challenge routing | The model cannot access the Identity Vault |
+| phone number is not exposed anywhere | phone number is hidden from the relying service, UI, and model | The vault boundary and carrier still process the destination |
 | AI authentication | GPT-guided recovery | The model does not authenticate |
 | prove who you are | prove control of a configured factor | No civil-identity proofing occurs |
 | biometric stored | device performs user verification | Biometrics remain with the authenticator |
@@ -194,6 +259,7 @@ flowchart LR
 
 | Date | Change | Reason |
 |---|---|---|
+| 2026-07-16 | v4 added Private Identity Relay terms | Approved pivot from recovery guide to privacy-preserving approval routing |
 | 2026-07-15 | v1 draft with 15 terms | Zephermine spec synthesis |
 | 2026-07-15 | v2 expert merge with 6 terms and refined recovery contracts | Team review |
 | 2026-07-15 | v3 final with no unresolved conflicts | Domain confirmation |

@@ -1,5 +1,7 @@
 # Implementation Plan: Authidenty Build Week Submission
 
+> Superseded on 2026-07-16 by [relay-mvp.md](relay-mvp.md). Retained as historical planning evidence for the original recovery-focused direction.
+
 Date: 2026-07-15
 Deadline: 2026-07-21 5:00 PM PT / 2026-07-22 9:00 AM KST
 Planning status: Draft before external review

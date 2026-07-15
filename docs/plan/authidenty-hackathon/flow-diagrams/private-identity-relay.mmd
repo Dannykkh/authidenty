@@ -1,0 +1,30 @@
+flowchart TD
+    Start([Relying service needs human approval]) --> ValidateRequest[Validate relay handle, service, action, and declared risk]
+    ValidateRequest -->|Invalid public input| GenericReject[Return generic request failure]
+    ValidateRequest -->|Valid shape| ResolveCandidate[Resolve opaque relay handle to one active account]
+    ResolveCandidate -->|Unknown, disabled, or throttled| GenericReject
+    ResolveCandidate -->|Active| BuildProjection[Build PII-free model projection]
+
+    BuildProjection --> ClassifyAction[GPT-5.6 returns typed purpose, summary, and suggested risk]
+    ClassifyAction -->|Timeout, refusal, or invalid schema| ConservativeFallback[Use conservative high-risk fallback]
+    ClassifyAction -->|Valid output| ClampRisk[Server computes maximum final risk]
+    ConservativeFallback --> ClampRisk
+
+    ClampRisk --> CreateRequest[Persist relay request and one-time challenge digest]
+    CreateRequest --> VaultLookup[Notification boundary resolves encrypted destination]
+    VaultLookup -->|Vault or delivery failure| DeliveryFailed[Record generic delivery failure]
+    VaultLookup -->|Destination available| SendChallenge[Simulated SMS adapter receives plaintext destination]
+    SendChallenge --> MaskDestination[Discard plaintext and return masked destination]
+    MaskDestination --> AwaitCode[Account holder submits OTP outside GPT]
+
+    AwaitCode --> VerifyState{Request active and code valid?}
+    VerifyState -->|Expired, consumed, or too many attempts| GenericVerifyFailure[Return generic verification failure]
+    VerifyState -->|Wrong code with attempts remaining| IncrementAttempt[Atomically increment attempt count]
+    IncrementAttempt --> GenericVerifyFailure
+    VerifyState -->|Valid code| ConsumeChallenge[Atomically consume challenge]
+    ConsumeChallenge --> IssueReceipt[Create pseudonymous verification receipt]
+    IssueReceipt --> ReturnReceipt[Return receipt without PII]
+    ReturnReceipt --> Complete([Relying service receives proof of account control])
+
+    ClassifyAction -. no tools or PII .-> ModelBoundary[Model cannot send, verify, or issue]
+    VaultLookup -. only decryption boundary .-> VaultBoundary[General application never receives raw phone]

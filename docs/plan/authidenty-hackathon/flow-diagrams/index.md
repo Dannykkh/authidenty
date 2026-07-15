@@ -4,12 +4,17 @@ These diagrams define the expected process before implementation. Node IDs are s
 
 | Diagram | Purpose | Primary actors |
 |---|---|---|
+| `private-identity-relay.mmd` | Opaque approval request, PII-free GPT classification, private challenge routing, OTP verification, and minimal receipt | Relying service, account holder, Authidenty, GPT-5.6 |
 | `passkey-setup-authentication.mmd` | Initial passkey creation, one-time Recovery Code display, and returning-user sign-in | Account holder, browser, Authidenty |
 | `recovery-diagnosis.mmd` | Failure classification, policy projection, GPT guidance, and deterministic fallback | Account holder, Authidenty, GPT-5.6 |
 | `recovery-code-authorization.mmd` | Independent Recovery Code verification, throttling, reservation, and scoped grant issuance | Account holder, Authidenty, SQLite |
 | `replacement-passkey-completion.mmd` | Replacement registration, atomic credential lifecycle changes, code rotation, and proof by normal sign-in | Account holder, authenticator, Authidenty, SQLite |
 
 ## Cross-Diagram State Boundaries
+
+- `private-identity-relay.mmd` is the active MVP baseline approved on 2026-07-16. The recovery diagrams remain historical and may supply later passkey-approval components.
+- A relay handle selects one account but does not authenticate it; only successful completion of the configured factor can issue a Verification Receipt.
+- GPT classification cannot call the notification adapter, resolve the Identity Vault, verify a challenge, or issue a receipt.
 
 - `PasskeySetupComplete` leads to `AuthStart` for normal access.
 - `AuthFailure` may lead to `RecoveryStart`, but an authentication failure never authorizes recovery.

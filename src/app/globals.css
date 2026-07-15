@@ -90,6 +90,27 @@ body {
   animation-delay: 140ms;
 }
 
+.registration-panel {
+  container: registration / inline-size;
+}
+
+.registration-fields {
+  display: grid;
+  gap: 1rem;
+}
+
+@container registration (min-width: 32rem) {
+  .registration-fields {
+    grid-template-columns: 0.8fr 1.2fr;
+  }
+}
+
+@supports selector(.passkey-form:has(input:user-invalid)) {
+  .passkey-form:has(input:user-invalid) input:user-invalid {
+    border-color: var(--signal);
+  }
+}
+
 @keyframes reveal {
   from {
     opacity: 0;

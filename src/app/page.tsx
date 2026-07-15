@@ -1,3 +1,5 @@
+import { PasskeyRegistration } from "@/features/passkeys/components/passkey-registration";
+
 export default function Home() {
   return (
     <main className="page-shell min-h-dvh overflow-hidden">
@@ -37,7 +39,7 @@ export default function Home() {
               way back in.
             </p>
             <span className="inline-flex w-fit items-center gap-2 border border-ink bg-ink px-4 py-3 font-mono text-[0.68rem] uppercase tracking-[0.16em] text-paper">
-              Hello shell is live
+              Passkey registration is live
               <svg aria-hidden="true" viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-none stroke-current">
                 <path d="M3 8h10M9 4l4 4-4 4" strokeWidth="1.5" />
               </svg>
@@ -45,40 +47,7 @@ export default function Home() {
           </div>
         </div>
 
-        <aside className="reveal reveal-late relative self-end border-l border-ink/20 pl-6 sm:pl-8 lg:mb-2">
-          <div className="absolute top-0 -left-px h-20 w-px bg-signal" aria-hidden="true" />
-          <p className="font-mono text-[0.68rem] uppercase tracking-[0.18em] text-ink/50">
-            Build sequence
-          </p>
-
-          <ol className="mt-8 divide-y divide-ink/15">
-            <li className="grid grid-cols-[2.25rem_1fr] gap-3 py-5 first:pt-0">
-              <span className="font-display text-2xl italic text-signal">01</span>
-              <div>
-                <p className="text-sm font-semibold">Running foundation</p>
-                <p className="mt-1 text-sm leading-6 text-ink/55">Next.js, TypeScript, Tailwind</p>
-              </div>
-            </li>
-            <li className="grid grid-cols-[2.25rem_1fr] gap-3 py-5">
-              <span className="font-display text-2xl italic text-ink/35">02</span>
-              <div>
-                <p className="text-sm font-semibold">Passkey ceremony</p>
-                <p className="mt-1 text-sm leading-6 text-ink/55">Registration and sign-in</p>
-              </div>
-            </li>
-            <li className="grid grid-cols-[2.25rem_1fr] gap-3 py-5">
-              <span className="font-display text-2xl italic text-ink/35">03</span>
-              <div>
-                <p className="text-sm font-semibold">Recovery conversation</p>
-                <p className="mt-1 text-sm leading-6 text-ink/55">Diagnosis and safe re-enrollment</p>
-              </div>
-            </li>
-          </ol>
-
-          <p className="mt-8 max-w-xs font-mono text-[0.64rem] leading-5 uppercase tracking-[0.13em] text-ink/45">
-            Stores credentials, never raw identity documents or biometrics.
-          </p>
-        </aside>
+        <PasskeyRegistration />
       </section>
 
       <footer className="mx-auto flex w-full max-w-[90rem] justify-between border-t border-ink/15 px-5 py-5 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-ink/45 sm:px-8 lg:px-12">

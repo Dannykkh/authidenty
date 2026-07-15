@@ -12,20 +12,21 @@ Identity checks often fail at the worst moment: a phone is lost, a one-time code
 - losing a device can turn into an account lockout;
 - uploading identity documents or biometric images creates lasting privacy risk.
 
-Authidenty separates authentication from explanation. WebAuthn credentials prove possession of a trusted authenticator. The planned recovery agent will interpret allow-listed failure signals, explain the next safe step, and guide re-enrollment. The model will never decide whether a user is the account owner or override a failed security check.
+Authidenty separates authentication from explanation. WebAuthn credentials prove possession of a trusted authenticator. The recovery agent interprets allow-listed failure signals, explains the next safe step, and guides the user toward a permitted recovery path. The model never decides whether a user is the account owner or overrides a failed security check.
 
 ## Project status
 
-Passkey registration now works end to end. The browser creates a credential through WebAuthn, the server verifies the ceremony, and SQLite stores only the reusable public credential fields.
+Passkey registration now works end to end, and the guided recovery conversation is wired to the OpenAI Responses API. The browser creates a credential through WebAuthn, the server verifies the ceremony, and SQLite stores only the reusable public credential fields. When access fails, the recovery panel sends bounded failure context to GPT-5.6 and displays only server-approved next steps.
 
 | Milestone | Status |
 | --- | --- |
 | Next.js, TypeScript, and Tailwind foundation | Complete |
 | Passkey registration | Complete |
 | SQLite credential persistence | Complete |
+| GPT-5.6 recovery-agent route | Complete |
+| Guided recovery conversation | Complete |
 | Passkey sign-in | Next |
-| GPT-5.6 recovery-agent route | Planned |
-| Secure re-enrollment conversation | Planned |
+| Cryptographically authorized re-enrollment | Next |
 
 ## Intended architecture
 
@@ -48,14 +49,17 @@ The prototype uses:
 - Tailwind CSS 4;
 - SimpleWebAuthn for passkey ceremonies;
 - SQLite for local credential storage, with a clear path to Postgres;
-- the OpenAI Responses API with [`gpt-5.6`](https://developers.openai.com/api/docs/guides/latest-model) for the planned recovery guidance.
+- the OpenAI Responses API with [`gpt-5.6`](https://developers.openai.com/api/docs/models/gpt-5.6-sol) for recovery guidance.
 
-Current passkey routes:
+Current API routes:
 
 | Route | Purpose |
 | --- | --- |
 | `POST /api/passkeys/register/options` | Validate the profile, create an opaque WebAuthn user ID, and issue a short-lived challenge. |
 | `POST /api/passkeys/register/verify` | Consume the one-time challenge, verify the attestation, and store the public credential. |
+| `POST /api/recovery/agent` | Validate an allow-listed failure signal and request structured recovery guidance from GPT-5.6. |
+
+The recovery request uses Structured Outputs with a Zod schema. It sets `store: false`, sends a privacy-preserving hash as the OpenAI safety identifier, and caps both conversation history and message length. The application does not persist recovery conversation text.
 
 ## Security boundaries
 
@@ -66,7 +70,7 @@ Current passkey routes:
 - Require an independent cryptographic recovery factor before re-enrollment.
 - Record recovery actions without placing secrets or personal evidence in model prompts.
 
-The registration implementation already enforces the storage boundary, opaque WebAuthn user IDs, expiring single-use challenges, user verification, strict relying-party checks, and authenticated re-enrollment as a future requirement. The recovery-specific boundaries remain requirements for the next implementation stages.
+The registration implementation enforces the storage boundary, opaque WebAuthn user IDs, expiring single-use challenges, user verification, and strict relying-party checks. The recovery implementation validates every request and model response, disables response storage, exposes no model tools, and rejects any action outside four server-owned options. Authenticated re-enrollment remains a future requirement; the agent cannot perform it.
 
 ## Run locally
 
@@ -93,9 +97,14 @@ Development uses safe localhost defaults. To make the relying-party and database
 AUTHIDENTY_DB_PATH=.data/authidenty.db
 WEBAUTHN_RP_ID=localhost
 WEBAUTHN_ORIGIN=http://localhost:3000
+OPENAI_API_KEY=
 ```
 
 Production requires both WebAuthn values. `WEBAUTHN_ORIGIN` must be HTTPS outside localhost and its hostname must match `WEBAUTHN_RP_ID`.
+
+Set `OPENAI_API_KEY` only in `.env.local` or the deployment environment. Leave it out of browser code and never commit it. Without a key, the recovery panel remains available but returns a clear configuration error instead of making a model request.
+
+To try recovery guidance, select **Lost a device or cannot sign in?**, choose a failure type, and describe the problem without entering passwords, PINs, one-time codes, identity document data, biometric data, or recovery-code contents.
 
 Run the current checks:
 
@@ -107,7 +116,7 @@ npm run build
 
 ## Built with Codex
 
-Codex owns the product implementation for this hackathon. It initialized the Git repository, connected the GitHub remote, generated the Next.js experience, designed the SQLite schema, implemented the registration ceremony, and wrote the project documentation.
+Codex owns the product implementation for this hackathon. It initialized the Git repository, connected the GitHub remote, generated the Next.js experience, designed the SQLite schema, implemented the registration ceremony and GPT-5.6 recovery route, verified the browser experience, and wrote the project documentation.
 
 The working method is intentionally visible in the history:
 
@@ -117,6 +126,6 @@ The working method is intentionally visible in the history:
 4. commit it with a clear English message;
 5. add the next product capability.
 
-The current registration flow was checked with unit tests, API smoke tests, and a Chromium virtual WebAuthn authenticator that created and verified a real public-key credential.
+The current registration flow was checked with unit tests, API smoke tests, and a Chromium virtual WebAuthn authenticator that created and verified a real public-key credential. The recovery flow was checked with policy-boundary tests, request validation tests, TypeScript and lint checks, and desktop and mobile browser runs. A live GPT-5.6 call requires a local API key and is intentionally not simulated as a production result.
 
-The runtime recovery agent and the coding agent serve different roles. Codex builds and tests the application. GPT-5.6 will power the in-product recovery conversation.
+The runtime recovery agent and the coding agent serve different roles. Codex builds and tests the application. GPT-5.6 powers the in-product recovery conversation.

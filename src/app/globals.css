@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-signal: var(--signal);
+  --font-sans: var(--font-geist);
+  --font-display: var(--font-newsreader);
+  --font-mono: var(--font-geist-mono);
+}
+
+:root {
+  color-scheme: light;
+  --paper: oklch(0.965 0.014 83);
+  --ink: oklch(0.19 0.018 67);
+  --signal: oklch(0.62 0.22 34);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-geist), sans-serif;
+}
+
+::selection {
+  background: var(--signal);
+  color: var(--paper);
+}
+
+.page-shell {
+  position: relative;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(oklch(0.19 0.018 67 / 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.19 0.018 67 / 0.045) 1px, transparent 1px);
+  background-size: 3rem 3rem;
+}
+
+.page-shell::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 76% 35%, oklch(0.62 0.22 34 / 0.1), transparent 28rem);
+  content: "";
+}
+
+.brand-mark {
+  position: relative;
+  display: grid;
+  width: 1.75rem;
+  height: 1.75rem;
+  place-items: center;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+}
+
+.brand-mark::before,
+.brand-mark span {
+  position: absolute;
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 999px;
+  background: var(--signal);
+  content: "";
+}
+
+.brand-mark::before {
+  transform: translateX(-0.28rem);
+}
+
+.brand-mark span {
+  transform: translateX(0.28rem);
+}
+
+.reveal {
+  animation: reveal 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.reveal-late {
+  animation-delay: 140ms;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    animation: none;
+  }
+}

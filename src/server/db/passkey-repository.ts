@@ -122,6 +122,21 @@ export function findUserByUsername(
   return row ? mapUser(row) : null;
 }
 
+export function findUserById(
+  database: Database.Database,
+  userId: string,
+): UserRecord | null {
+  const row = database
+    .prepare(
+      `SELECT id, username, display_name, webauthn_user_id
+       FROM users
+       WHERE id = ?`,
+    )
+    .get(userId) as UserRow | undefined;
+
+  return row ? mapUser(row) : null;
+}
+
 export function storeChallenge(
   database: Database.Database,
   challenge: ChallengeRecord,

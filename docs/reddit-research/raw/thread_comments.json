@@ -1,0 +1,485 @@
+{
+ "1g425zb": {
+  "title": "It's not just a 'teen social media ban', it's a national age verification scheme",
+  "subreddit": "privacy",
+  "permalink": "https://www.reddit.com/r/privacy/comments/1g425zb/its_not_just_a_teen_social_media_ban_its_a/",
+  "comments": [
+   {
+    "author": "nidostan",
+    "score": 98,
+    "body": "So how long before we need age verification for reddit and youtube?  Predictions?"
+   },
+   {
+    "author": "austriaianpanter",
+    "score": 62,
+    "body": "A security nightmare incoming when this whole fucking thing gets leaked online with legitimate copies of IDs and addresses gets exposed in a data base. If I have to sacrifice my fucking identity to shitpost online then fuck social media in its ass I will use fucking telegraph lines to shit post."
+   },
+   {
+    "author": "cycling_triviality",
+    "score": 53,
+    "body": "Yeah, sure, let’s give even more personal info to companies that already mishandle our data"
+   },
+   {
+    "author": "H3ll3rsh4nks",
+    "score": 45,
+    "body": "Except its not, its their thinly veiled attempt at making everyone have to out themselves for what they do online.  Just like the porn age verification in various states can be used to blackmail people, this could be used to further tie people to thought crime etc."
+   },
+   {
+    "author": "Stefan_Estpascher",
+    "score": 44,
+    "body": "Can I see your id sir ?"
+   },
+   {
+    "author": "foobarhouse",
+    "score": 36,
+    "body": "Obviously."
+   },
+   {
+    "author": "austriaianpanter",
+    "score": 36,
+    "body": "A security nightmare incoming when this whole fucking thing gets leaked online with legitimate copies of IDs and addresses gets exposed in a data base. If I have to sacrifice my fucking identity to shitpost online then fuck social media in its ass I will use fucking telegraph lines to shit post.\n\nI WANT TO KNOW IF I CAN SHIT POST IN PEACE."
+   },
+   {
+    "author": "H3ll3rsh4nks",
+    "score": 36,
+    "body": "Except its not, its their thinly veiled attempt at making everyone have to out themselves for what they do online.  Just like the porn age verification in various states can be used to blackmail people, this could be used to further tie people to thought crime etc. Eventually these people want you to have to verify your identity to just sit down at a computer or unlock your phone, zero privacy."
+   }
+  ]
+ },
+ "1fz3mg8": {
+  "title": "How many MFA claims do you do in a day?",
+  "subreddit": "sysadmin",
+  "permalink": "https://www.reddit.com/r/sysadmin/comments/1fz3mg8/how_many_mfa_claims_do_you_do_in_a_day/",
+  "comments": [
+   {
+    "author": "L3veLUP",
+    "score": 2,
+    "body": "Or if your door control system supports it you may be able to use the same pass as a second factor for a PC.\n\nI know some hospitals use Key cards to login to systems"
+   },
+   {
+    "author": "Helpful_Friend_",
+    "score": 1,
+    "body": "While I agree with your statement and am all for ZTNA, in a place like OP's where they have a this dumb issue on top of what sounds like little to no ZTNA infra, I'd argue in this case having your public IP on what sounds like a place that would have a static IP, just be a trusted source. It's definitely a band aid solution to a bigger under lying issue, that it doesn't sound like op can solve"
+   },
+   {
+    "author": "PhilipLGriffiths88",
+    "score": 1,
+    "body": "Better, IMHO, you strong crypto identity on the endpoint so that you have implicit MFA, without needing explicit TOTP MFA. That ensures untrusted endpoints CANNOT connect without trusting IP addresses which are assumed compromised in ZTNA."
+   },
+   {
+    "author": "Helpful_Friend_",
+    "score": 1,
+    "body": "If you use azure conditional access for MFA you can specify your public IP as a trusted network to make it prompt less."
+   },
+   {
+    "author": "DifferentContext7912",
+    "score": 1,
+    "body": "It's because users don't like new things. They've been using the same password since the 90s and a new pin is hard to remember /s\n\nOur IT people like it, the general populace just sees it as something else they have to carry around and maybe lose 🤷"
+   },
+   {
+    "author": "ethnicman1971",
+    "score": 1,
+    "body": "We require all the admins to connect via a jumpbox to connect to our servers.  We do an MFA claim to connect to the jumpbox and then no MFA to connect to each server.  Everywhere else we are not required to do an MFA claim if we are on-site.  So, I do an MFA claim maybe 3-4 times a day.  Usually when my jumpbox session goes to sleep and I need to wake it up."
+   },
+   {
+    "author": "DeadFyre",
+    "score": 1,
+    "body": "&gt;All systems time out after 15 minutes.\n\nThat is incredibly stupid."
+   },
+   {
+    "author": "horus-heresy",
+    "score": 1,
+    "body": "15-20 in a day easily. We don’t do just approve deny. We have to type in 3 digit code into duo. What you gonna do? Paid to press green button"
+   }
+  ]
+ },
+ "1kcfrfa": {
+  "title": "Exodus Wallet - All My Crypto Hacked &amp; Stolen.",
+  "subreddit": "CryptoCurrency",
+  "permalink": "https://www.reddit.com/r/CryptoCurrency/comments/1kcfrfa/exodus_wallet_all_my_crypto_hacked_stolen/",
+  "comments": [
+   {
+    "author": "DeaderthanZed",
+    "score": 19,
+    "body": "You just said they were using Anydesk to gain remote access…then they can simply open Exodus via your browser extension, enter the password (if even necessary you might have already been logged in), and send the crypto out to an address they control…\n\nDon’t game or download any apps on any device you use for crypto. Also don’t use mobile apps. Use a dedicated machine."
+   },
+   {
+    "author": "slindner1985",
+    "score": 1,
+    "body": "Should have pulled the network cable out of your pc as soon as you saw that stuff"
+   },
+   {
+    "author": "slindner1985",
+    "score": 1,
+    "body": "Yikes"
+   },
+   {
+    "author": "AnthonyBTC",
+    "score": 1,
+    "body": "I’ve used Exodus as my hot wallet since 2016. Personally, I only keep crypto on my hardware wallets that I don’t plan to touch, since having to open the safe every time gets tedious. That said, ideally, no one should rely on a hot wallet ever."
+   },
+   {
+    "author": "jawanda",
+    "score": 1,
+    "body": "This is the real question"
+   },
+   {
+    "author": "ZeraPain",
+    "score": 1,
+    "body": "How could they still have access after you formatted the pc?"
+   },
+   {
+    "author": "ZeraPain",
+    "score": 1,
+    "body": "How could they still have access to the pc after he formatted the whole pc?"
+   },
+   {
+    "author": "chanmalichanheyhey",
+    "score": 1,
+    "body": "Sometimes I feel an reputatble exchange poses less risk to myself than myself"
+   }
+  ]
+ },
+ "1fngrah": {
+  "title": "Why do banks require biometric data, and how safe is it really?\n",
+  "subreddit": "privacy",
+  "permalink": "https://www.reddit.com/r/privacy/comments/1fngrah/why_do_banks_require_biometric_data_and_how_safe/",
+  "comments": [
+   {
+    "author": "MrJingleJangle",
+    "score": 27,
+    "body": "Banks are the eyes and ears of the money laundering police.  Most countries have laws like “know your customer” which requires the bank to have, and usually keep, solid evidence of your identity.  \n\nHere in New Zealand, we have a government-run ID service called RealMe, and if you are identified to that, then some banks will accept a RealMe identification as valid, and in that case the bank doesn’"
+   },
+   {
+    "author": "Melnik2020",
+    "score": 15,
+    "body": "You have very valid concerns. These measures seem to tackle money laundering and identity fraud, as they also have to fulfill regulations. Unfortunately, this oversteps privacy"
+   },
+   {
+    "author": "MrJingleJangle",
+    "score": 9,
+    "body": "The system we have does allow proof without revealing biometric data.  It’s a federated ID system, so release of information is controlled by the user.  Each organisation that federates gets a different version of me, so there is no common linking key between consumers.  Such a common linking ID (such as the US SSN) is not legal in NZ, we have an unusual provision in our privacy act which for its "
+   },
+   {
+    "author": "MrJingleJangle",
+    "score": 8,
+    "body": "The system we have does allow proof without revealing biometric data.  It’s a federated ID system, so release of information is controlled by the user.  Each organisation that federates gets a different version of me, so there is no common linking key between consumers.  Such a common linking ID (such as the US SSN) is not legal in NZ, we have an unusual provision in our privacy act which forbids "
+   },
+   {
+    "author": "drlongtrl",
+    "score": 6,
+    "body": "You didn´t include the country in question, nor the bank. Who knows, what the answer to all those questions you asked is where YOU live. \n\nHere´s the German perspective though:\n\nA bank is required by law to verify who a new customer is. We all have ID cards with a picture on it, so the traditional, and sufficient, way of doing this was: You walk into a bank, show your ID to the employee, they look"
+   },
+   {
+    "author": "Melnik2020",
+    "score": 5,
+    "body": "I’m not defending it, just explaining"
+   },
+   {
+    "author": "damchi",
+    "score": 5,
+    "body": "Because of the children..."
+   },
+   {
+    "author": "FiragaFigaro",
+    "score": 4,
+    "body": "It’s possible to open up a bank account on a mobile app? I’ve opened a bank account in more than one country and it involved an in-person application. ID verification involved my passport and certain identification numbers, but no explicit face token registration."
+   }
+  ]
+ },
+ "1fwv0eo": {
+  "title": "Can people post your face on pornsites without you knowing? (Even if its just a face or clothed picture)",
+  "subreddit": "privacy",
+  "permalink": "https://www.reddit.com/r/privacy/comments/1fwv0eo/can_people_post_your_face_on_pornsites_without/",
+  "comments": [
+   {
+    "author": "Y4K0",
+    "score": 1,
+    "body": "If you made a profile on some sketchy companies site, it doesn’t matter if you “delete” the profile or information or how fast you do it, they can keep a copy of your information if they want. Facebook is notorious for doing this, and they’re a mega corp. \n\nIf you can’t find it on tiny eye means it (probably) hasn’t been posted online, but could still be in a private collection. \n\nIf it’s just a n"
+   },
+   {
+    "author": "imselfinnit",
+    "score": 1,
+    "body": "It doesn't matter what the policy says. Those documents are not magic spells, they're just pinky promises."
+   },
+   {
+    "author": "imselfinnit",
+    "score": 1,
+    "body": "Sadly, you do have to worry about them or some image harvesting bot that is not even theirs having infinite copies of your photo, that's the Internet. But, that works to your advantage too because you can just say that someone else used that image and they probably didn't even know where that image came from. To them, it's just some random image. Now, if that photo is a little more spicy than you'"
+   },
+   {
+    "author": "imselfinnit",
+    "score": 1,
+    "body": "Yes, they say that so people don't keep them busy restoring the account data on a whim. It's like Google etc. You delete something (empty your trash), but they do not empty their trash. They just remove it from your sight."
+   },
+   {
+    "author": "imselfinnit",
+    "score": 1,
+    "body": "It sounds to me that you're safe (from this event). Time doesn't really come into it with these types of things. Data doesn't last forever but we're not talking about groceries either.\n\n&gt; I highly daoubt they have bots on that website since u need to confirm that u arent one.\n\nOh young one, no. Not at all. You trust too much in stated rules and what is supposed to be. That's not how this world "
+   },
+   {
+    "author": "imselfinnit",
+    "score": 1,
+    "body": "Meh, think of it as a lesson you've learned where the lesson is that you just don't know what it is that you don't know. You're learning. Do you know the story about [the sword of Damocles](https://en.m.wikipedia.org/wiki/Damocles)?  Our choices are like that. There is a lot to be paranoid about but that too is a choice, one that will mess up your enjoyment of life. It's done for now, probably for"
+   },
+   {
+    "author": "imselfinnit",
+    "score": 1,
+    "body": "If you've deleted both it demonstrates that you chose a different path forward. Can they even prove that it was you to begin with. Just because it's your information that was used, from your house, doesn't mean it was you."
+   },
+   {
+    "author": "PicaPaoDiablo",
+    "score": 1,
+    "body": "Yes people can post your picture on porn sites without you knowing about it. People can pretend to be you. People do a lot of screwed up stuff. They can Photoshop your face on things too. As far as Only fans and porn hub or sites with verification it's a bit more difficult. Only you and her knowing about it is not probably the case, but at the same time there's little probability it really got out"
+   }
+  ]
+ },
+ "1j4uhes": {
+  "title": "Best kyc/id verification company? For kyc",
+  "subreddit": "fintech",
+  "permalink": "https://www.reddit.com/r/fintech/comments/1j4uhes/best_kycid_verification_company_for_kyc/",
+  "comments": [
+   {
+    "author": "destinaah",
+    "score": 1,
+    "body": "shufti is also pretty good"
+   },
+   {
+    "author": "doctorn-ck",
+    "score": 1,
+    "body": "Depending on your markets there are many plenty. SumSub, Onfido, Jumio, Yoti,Veriff are all worth a look."
+   },
+   {
+    "author": "doctorn-ck",
+    "score": 1,
+    "body": "Not one I have experience with unlike the others I listed. Couldn’t tell you anything about them.\n\nIn the end we went with SumSub"
+   },
+   {
+    "author": "FlamingoAwkward7507",
+    "score": 1,
+    "body": "Depends on what you need! Some companies are great for biometric verification, others focus more on document validation... If you’re handling a high volume of verifications or need a flexible workflow, it’s worth looking at solutions that let you fine-tune risk scoring and automate decision-making beyond just verifying an ID.\n\nI know a founder of a compliance automation company who has a lot of co"
+   },
+   {
+    "author": "ducster",
+    "score": 1,
+    "body": "Verriff has been pretty good in my experience. Another one I have used is vouched."
+   },
+   {
+    "author": "alphaover9000",
+    "score": 1,
+    "body": "Hey! If you need help setting up compliance, I can connect you with my friend who could offer some advice. He’s building a fintech compliance automation platform, so I’m sure he’d be open to hearing more about what you need for KYC and beyond to shed light. He’s been in the space for over a decade"
+   },
+   {
+    "author": "DevelopmentFew7454",
+    "score": 1,
+    "body": "Are you looking to do this through digital wallets?"
+   },
+   {
+    "author": "DevelopmentFew7454",
+    "score": 1,
+    "body": "I have messaged you"
+   }
+  ]
+ },
+ "1k0g7ge": {
+  "title": "Kakao Talk RC Card verification",
+  "subreddit": "Living_in_Korea",
+  "permalink": "https://www.reddit.com/r/Living_in_Korea/comments/1k0g7ge/kakao_talk_rc_card_verification/",
+  "comments": [
+   {
+    "author": "Indefatigablex",
+    "score": 8,
+    "body": "Hey, sorry to hear that. I'm not particularly experienced with this issue, but the most probable cause would be:\n\n1. You're name does not match (A LOT has been tortured by Korean authorities for misspelled names, such as wrong spacing or first/last being swapped)\n2. The phone you're using is not a regular cell line (KT/SK/U+/MVNO). You should've used your ARC when creating the line to create such "
+   },
+   {
+    "author": "Cylee22",
+    "score": 1,
+    "body": "Once you link your ARC to your cell service, all verifications should be much smoother for you.\n\nYou do not need to link your insurance. If this is for ordering coupang etc. then you will need a bank account, which I assume you have? You do not need to have a bank account from Kakao, any bank account will do.\n\nUltimately, like a previous poster said, you want to get your ARC, cell service, and ban"
+   },
+   {
+    "author": "Cylee22",
+    "score": 1,
+    "body": "yeah, I believe so. Ideally, you want to get your ARC, use it to open a cell service, and then go and open a Korean bank account. Opening a bank account should be free, Hana, NH, KB, Woori, Shinhan, etc."
+   },
+   {
+    "author": "Rare-Winner-328",
+    "score": 1,
+    "body": "Try typing your name in all caps sometimes even without spaces?"
+   },
+   {
+    "author": "Calm_Check4049",
+    "score": 1,
+    "body": "Did you get a cell phone plan with your ARC card attached to the account yet? You need that to pass the verification process (Most Korean app/website/online stores require your phone line to be connected to your ARC and sometimes bank account too)"
+   },
+   {
+    "author": "kayzest",
+    "score": 1,
+    "body": "Oh I think I have not linked my ARC to my service provider. However I heard that after this step, I have to link my insurance and open a bank account too? Is that true?"
+   },
+   {
+    "author": "kayzest",
+    "score": 1,
+    "body": "Do I have to submit my insurance and open a bank account too to pass the verification?"
+   },
+   {
+    "author": "Calm_Check4049",
+    "score": 1,
+    "body": "I don’t think you need the bank account for Kakotalk. I could be wrong though. Just some online stores require that as part of their verification process. 90% of the online verification just checks your name, Korean phone number (with ARC attached), and sends you a text with a verification code if they match. I needed a bank account to attach to my phone provider to get a plan, so I’m not 100% sur"
+   }
+  ]
+ },
+ "1kn1yrk": {
+  "title": "Concert tickets in Japan",
+  "subreddit": "Living_in_Korea",
+  "permalink": "https://www.reddit.com/r/Living_in_Korea/comments/1kn1yrk/concert_tickets_in_japan/",
+  "comments": [
+   {
+    "author": "throwitrighttfaway",
+    "score": 6,
+    "body": "I just know this is about Bad Bunny haha"
+   },
+   {
+    "author": "daliz2108",
+    "score": 2,
+    "body": "Hi, i sent you a dm with his link."
+   },
+   {
+    "author": "throwitrighttfaway",
+    "score": 1,
+    "body": "I am losing it over this tokyo concert as well cause I really want to go but I don't want to miss out over booking technicalities"
+   },
+   {
+    "author": "throwitrighttfaway",
+    "score": 1,
+    "body": "Could you send me the link too?"
+   },
+   {
+    "author": "brown_boot123",
+    "score": 1,
+    "body": "It is 💀"
+   },
+   {
+    "author": "brown_boot123",
+    "score": 1,
+    "body": "Thank you!!"
+   },
+   {
+    "author": "chongyunsite",
+    "score": 1,
+    "body": "One of my friends needed someone in Japan to do the payment for her to buy concert tickets not long ago. It doesn't mean no foreign cards work, but some certainly don't"
+   },
+   {
+    "author": "daliz2108",
+    "score": 1,
+    "body": "There is a guy on Fiverr, he lives in Japan and buys tickets for foreigners who can't get them (on their behalf) maybe he can help you.\n\nI sent you his link in dm."
+   }
+  ]
+ },
+ "1kq6991": {
+  "title": "I just realized I use Google to log into Binance. That feels… wrong?",
+  "subreddit": "fintech",
+  "permalink": "https://www.reddit.com/r/fintech/comments/1kq6991/i_just_realized_i_use_google_to_log_into_binance/",
+  "comments": [
+   {
+    "author": "xaic",
+    "score": 2,
+    "body": "Yeah, I get what you're saying — and you're not wrong. Losing access to your Gmail can screw up access to almost everything. Password resets, 2FA codes, recovery links… they all go through that one inbox. So yeah, it becomes the weakest link.\n\nBut that's not really about Google or SSO. That’s just how the internet is built — most services fall back to email as the master key. Even if you used diff"
+   },
+   {
+    "author": "farhadsuleymanzade",
+    "score": 2,
+    "body": "It’s not just that I use Google to log into Binance.\n\nIt’s that almost every account I have depends on access to my Gmail, even ones I sign into with a password.\n\nIf I lose that inbox, I lose password resets, 2FA codes, recovery links… basically everything.\n\nWe treat email like we own it, but we don’t. It’s controlled by companies that can suspend, flag, or delete it and when that happens, your di"
+   },
+   {
+    "author": "ConsciousStop",
+    "score": 1,
+    "body": "Did binance force it on you, or did you volunteer to use google login to sign up with them?"
+   },
+   {
+    "author": "ConsciousStop",
+    "score": 1,
+    "body": "I don’t have a binance account, so can’t say for sure- you probably have options in account settings to decouple thr login and create new credentials.\n\nOnce that’s completed, log into myaccount.google.com, search in settings for third party apps and services to disconnect binance. Disconnect other 3rd party services too that you don’t recognise or don’t need connected anymore."
+   },
+   {
+    "author": "xaic",
+    "score": 1,
+    "body": "Hey, just to clarify — that's not how SSO (Single Sign-On) works.\n\nWhen you use Google to log into Binance, you're not giving Google access to your Binance account, crypto, or KYC documents. What actually happens is simple: Binance asks Google, \"Do you recognize this user?\" and Google replies, \"Yes, here's a token that confirms their identity.\" That's it. Google is just confirming your identity. I"
+   },
+   {
+    "author": "farhadsuleymanzade",
+    "score": 1,
+    "body": "Totally fair question. No, Binance didn’t force it, I chose Google login because it was fast and convenient at the time.\n\nBut now that I think about it, I basically gave one company (Google) the keys to access my crypto, my KYC docs, everything.\n\nAnd if they lock me out for whatever reason, glitch, suspicion, policy, I’m cut off from my Binance account too.\n\nIt just feels weird that access to some"
+   }
+  ]
+ },
+ "1kihcjn": {
+  "title": "Frankfurt authorities seize $38.2m from eXch due to money laundering allegations",
+  "subreddit": "CryptoCurrency",
+  "permalink": "https://www.reddit.com/r/CryptoCurrency/comments/1kihcjn/frankfurt_authorities_seize_382m_from_exch_due_to/",
+  "comments": [
+   {
+    "author": "nails4coffee",
+    "score": 1,
+    "body": "Governments don’t like when people have financial independence."
+   },
+   {
+    "author": "Hunt846",
+    "score": 1,
+    "body": "Strange, they had already planned to shutdown their operations on May 1? And now they've been busted?"
+   }
+  ]
+ },
+ "1kkza25": {
+  "title": "KYC Providers: iDenfy vs SumSub vs Jumio - Recommendations?",
+  "subreddit": "fintech",
+  "permalink": "https://www.reddit.com/r/fintech/comments/1kkza25/kyc_providers_idenfy_vs_sumsub_vs_jumio/",
+  "comments": []
+ },
+ "1k9l9qv": {
+  "title": "As a Korean living aboard, SKT’s hack might be a good thing in the long run",
+  "subreddit": "korea",
+  "permalink": "https://www.reddit.com/r/korea/comments/1k9l9qv/as_a_korean_living_aboard_skts_hack_might_be_a/",
+  "comments": [
+   {
+    "author": "Mr-S-44",
+    "score": 1,
+    "body": "Kinda reminds me of the Nonghyup Bank hack 14 years ago which crashed the SQL servers and shut down services for a week. OP, were you in-country for that? I remember trying to buy a hot chocolate after class and they denied my card. It wasn't until I turned on the TV when I learned about what happened."
+   },
+   {
+    "author": "Shiba_inyou",
+    "score": 1,
+    "body": "But government is spineless. Nothing is every enforced against the chaebols. Building fines didnt change all the deaths that happen due to shitty construction here. You need to change 빨리 빨리 culture which wont happen."
+   },
+   {
+    "author": "OwlOfJune",
+    "score": 1,
+    "body": "&gt; at least this will help us convince our aging leadership to adapt modern ID protocols in the future.\n\nLol.\n\nLmao.\n\nThey will rather die."
+   },
+   {
+    "author": "Shiba_inyou",
+    "score": 1,
+    "body": "Korea wont change. There is too much money and political interests involved in this. The cultura and corporate intertia to move away from sms 2fa is just too much."
+   },
+   {
+    "author": "Shiba_inyou",
+    "score": 1,
+    "body": "L take. Do better next time"
+   },
+   {
+    "author": "DateMasamusubi",
+    "score": 1,
+    "body": "Security experts have been warning for years about the ridks asdociated with SMS auth. And Google has finally started to move to other forms of auth verification.\n\nNorth Korea is viewed as a possible suspect in the SKT havk and their capabilities are progressing quickly. This will get the ball rolling on cyberdefense."
+   },
+   {
+    "author": "JD3982",
+    "score": 1,
+    "body": "I'm with you on there being a gradual shift but good luck punishing the SK Group."
+   },
+   {
+    "author": "grammaryahtzeee",
+    "score": 1,
+    "body": "Id just want to point out biometrics shouldn't be part of a security protocol because data breaches involving biometric information result in permanent loss—unlike passwords, biometrics can't be changed once compromised.\n\nThere's a reason many systems use hardware-level biometric keys."
+   }
+  ]
+ }
+}

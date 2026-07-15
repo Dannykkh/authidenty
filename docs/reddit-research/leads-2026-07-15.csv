@@ -1,0 +1,29 @@
+score,title,subreddit,author,ups,comments,date,url,pain_points,icp_match
+7,"Any idea how to get past youtube verification? All combinations of name incorrect",Living_in_Korea,,25,34,2026-04,https://www.reddit.com/r/Living_in_Korea/comments/1ss36gf/,실패복구;기기채널종속,높음
+7,"The 'papers, please' era of the internet will decimate your privacy (KIDS Act)",Futurology,Future-sight-5829,13000,781,2026-06-29,https://www.reddit.com/r/Futurology/comments/1uipr0z/,프라이버시;데이터유출불안,중간
+7,"Is there any particular reason Korea is so... secure?",Living_in_Korea,,107,47,2025-11,https://www.reddit.com/r/Living_in_Korea/comments/1om9wge/,복잡성;기기채널종속,높음
+7,"How many MFA claims do you do in a day?",sysadmin,Krytos,103,123,2024-10-08,https://www.reddit.com/r/sysadmin/comments/1fz3mg8/,복잡성,높음
+7,"CBA blocked all my accounts",AusFinance,,78,80,2025-10,https://www.reddit.com/r/AusFinance/comments/1oc1sxo/,실패복구,높음
+6,"""Discord alternatives"" searches jump 10,000% overnight (global age verification)",technology,,42000,2300,2026-02,https://www.reddit.com/r/technology/comments/1r1fid6/,프라이버시;복잡성,중간
+6,"Reddit is weighing identity verification methods (Face ID/Touch ID)",technology,,8900,2700,2026-03,https://www.reddit.com/r/technology/comments/1s0d02u/,프라이버시,중간
+6,"Why do banks require biometric data, and how safe is it really?",privacy,GrapefruitNo2445,26,50,2024-09-23,https://www.reddit.com/r/privacy/comments/1fngrah/,프라이버시;복잡성,높음
+6,"Best kyc/id verification company? For kyc",fintech,Parking-Cover6415,3,14,2025-03-06,https://www.reddit.com/r/fintech/comments/1j4uhes/,통합,높음(B2B)
+6,"KYC Providers: iDenfy vs SumSub vs Jumio - Recommendations?",fintech,Low-Association-3466,2,4,2025-05-12,https://www.reddit.com/r/fintech/comments/1kkza25/,통합,높음(B2B)
+5,"Oh, good: Discord's age verification rollout has ties to Palantir co-founder",technology,,51000,1300,2026-02,https://www.reddit.com/r/technology/comments/1r49346/,프라이버시;데이터유출불안,중간
+5,"It's not just a 'teen social media ban', it's a national age verification scheme",privacy,a_Ninja_b0y,335,70,2024-10-15,https://www.reddit.com/r/privacy/comments/1g425zb/,프라이버시;데이터유출불안,중간
+5,"EXPOSED: The FCC approved a plan to require government ID for phone numbers",InterstellarKinetics,,4800,558,2026-06,https://www.reddit.com/r/InterstellarKinetics/comments/1u1et7k/,프라이버시,낮음
+5,"Kakao Talk RC Card verification",Living_in_Korea,kayzest,3,12,2025-04-16,https://www.reddit.com/r/Living_in_Korea/comments/1k0g7ge/,실패복구;기기채널종속,높음
+5,"Identity Verification Services (Plaid alternatives for B2C payout)",fintech,No_Vacation6592,1,3,2024-12-10,https://www.reddit.com/r/fintech/comments/1hb4wc5/,통합,높음(B2B)
+5,"Having issues With Identity Verification (ITIN, no SSN)",Banking,pd08111997,1,3,2024-10-14,https://www.reddit.com/r/Banking/comments/1g3i1fk/,실패복구,높음
+4,"가족관계증명서 online: asks phone verification for my 2-month-old baby",Living_in_Korea,Chilis1,3,2,2025-04-11,https://www.reddit.com/r/Living_in_Korea/comments/1jwi45t/,기기채널종속,높음
+4,"Korean online shopping Identity Verification (buying eSIM just for SMS auth)",korea,Potential-Coffee5666,1,1,2024-11-13,https://www.reddit.com/r/korea/comments/1gq9c7b/,기기채널종속,높음
+4,"Biometric data for identity verification (Plaid forced for apartment application)",privacy,RoachieFL,1,1,2025-05-05,https://www.reddit.com/r/privacy/comments/1kficzr/,프라이버시,높음
+4,"I just realized I use Google to log into Binance. That feels... wrong?",fintech,farhadsuleymanzade,3,7,2025-05-19,https://www.reddit.com/r/fintech/comments/1kq6991/,기기채널종속;통합,중간
+3,"As a Korean living abroad, SKT's hack might be a good thing in the long run",korea,typeryu,7,1,2025-04-28,https://www.reddit.com/r/korea/comments/1k9l9qv/,기기채널종속,중간
+3,"I'm disappointed in Coinbase (KYC data leak rant)",CryptoCurrency,deejaystu1,1,1,2025-05-16,https://www.reddit.com/r/CryptoCurrency/comments/1kob6kr/,데이터유출불안,중간
+3,"Chase couldn't fix that a 2FA phone number was not a number I recognized",mildlyinfuriating,MasterCafecat,1,1,2024-10-05,https://www.reddit.com/r/mildlyinfuriating/comments/1fweecu/,실패복구,중간
+3,"Has KYC / AML gotten worse since Covid?",privacy,ColdInMinnesooota,1,1,2025-05-13,https://www.reddit.com/r/privacy/comments/1kly7ty/,복잡성,중간
+3,"Microsoft/Entra EAM annoying Continue prompt",sysadmin,SysADHDmin,2,1,2025-03-12,https://www.reddit.com/r/sysadmin/comments/1j9l65e/,복잡성,중간
+3,"Phone broke, locked out of email even without 2FA enabled",mildlyinfuriating,LTiger9-_-,1,1,2024-10-21,https://www.reddit.com/r/mildlyinfuriating/comments/1g8egzf/,실패복구;기기채널종속,중간
+3,"pricing information for bank integration solutions (Plaid/MX opaque pricing)",fintech,ToreroAfterOle,2,0,2024-09-03,https://www.reddit.com/r/fintech/comments/1f87qhu/,가격,중간(B2B)
+2,"RANT - login.gov uses LexisNexis",privacy,privacyovermatter,1,1,2025-03-25,https://www.reddit.com/r/privacy/comments/1jjv8l7/,프라이버시,낮음

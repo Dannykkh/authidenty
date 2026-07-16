@@ -1,98 +1,101 @@
-# Authidenty
+# Authidenty: You Know Me?
 
-Authidenty is a private identity relay for human approval. An AI service can ask an enrolled person to approve an action without repeatedly collecting that person's phone number, legal name, birth date, identity document, or biometric.
+Authidenty is a conversational-continuity login experiment. It asks different questions at enrollment and return, compares how the answers are written, selects the most likely enrolled profile, and then requires a one-time code sent to the enrolled device.
 
 Built for OpenAI Build Week in the **Apps for Your Life** category.
 
 ## The idea
 
-Sending another SMS is not the innovation. Changing who learns the phone number is.
-
-A relying service sends Authidenty an opaque relay handle and a bounded description of the action. GPT-5.6 converts the action into a typed, human-readable purpose and risk suggestion. Server policy chooses the final risk and required factor, Authidenty privately routes a challenge to the enrolled destination, and the service receives a short-lived pseudonymous receipt instead of personal data.
+People repeatedly type the same identity facts into new services: name, phone number, birthday, and sometimes an identity document. Authidenty explores whether a small, derived response-style profile can help find the right account without asking for those facts again.
 
 ```text
-AI service                    Authidenty                         Human device
-    |                             |                                   |
-    | opaque handle + action      |                                   |
-    |---------------------------->|                                   |
-    |                             | GPT-5.6 classifies action          |
-    |                             | server clamps final risk           |
-    |                             | decrypts route only for delivery   |
-    |                             |----------------------------------->|
-    |                             |          one-time challenge        |
-    |                             |<-----------------------------------|
-    |    minimal receipt          |       deterministic OTP proof      |
-    |<----------------------------|                                   |
+Enrollment
+  name + phone + three answers
+  -> derive style-v1 numerical metrics
+  -> encrypt phone with AES-256-GCM
+  -> do not store raw answer sentences
+
+Return
+  three different answers, without name or phone
+  -> derive a second numerical vector
+  -> deterministic ranking selects the closest profile
+  -> GPT-5.6 Sol compares only the two vectors
+  -> strong match reveals name + masked phone
+  -> one-time device code completes verification
 ```
 
-GPT is not the authenticator. It never receives the phone number, opens the vault, sends a challenge, verifies the code, or issues a receipt.
+The model is not the final authenticator. A conversational match selects a candidate; possession of the enrolled device verifies the login.
 
 ## What works now
 
-The current vertical slice runs end to end in the browser:
+The browser demo runs this complete flow:
 
-1. create a demo relay profile with an opaque handle and AES-256-GCM-encrypted phone destination;
-2. submit an action request without personal data;
-3. classify the action with GPT-5.6 Structured Outputs, or use a conservative high-risk fallback when the model is unavailable;
-4. route a simulated SMS challenge while persisting only a masked destination and keyed code digest;
-5. verify the six-digit code with expiry, attempt, and single-use controls;
-6. return a purpose-bound receipt containing a pseudonymous subject, purpose, final risk, factor, issue time, and expiry.
+1. enroll `Danny Kim`, the reserved fictional number `+1 202-555-0184`, and three sample answers;
+2. store only a derived style vector and an encrypted phone destination;
+3. answer three different return questions without submitting a name or phone number;
+4. rank active profiles with deterministic feature similarity;
+5. ask GPT-5.6 Sol for a structured vector-to-vector similarity score and short explanation;
+6. reveal `Danny Kim` and `***-***-0184` only when the combined score reaches the server threshold;
+7. send a simulated six-digit device challenge;
+8. verify the HMAC digest with expiry, attempt, and single-use controls.
+
+Weak matches return one generic result and reveal no candidate name, phone suffix, or OTP route.
 
 | Capability | Status |
 | --- | --- |
-| Private relay UI and three-route API | Working |
-| Encrypted contact vault | Working |
-| GPT-5.6 action classification | Working with `OPENAI_API_KEY` |
-| Live GPT-5.6 browser verification | Complete |
+| Enrollment and cross-question return flow | Working |
+| Derived `style-v1` profile without stored answer text | Working |
+| AES-256-GCM encrypted phone storage | Working |
+| GPT-5.6 Sol Structured Outputs analysis | Working with `OPENAI_API_KEY` |
 | Conservative model-failure fallback | Working |
-| Simulated challenge delivery | Working and visibly labeled |
-| Minimal verification receipt | Working |
-| WebAuthn passkey registration module | Retained from the first prototype |
-| Real SMS and enrollment ownership proof | Not implemented |
-| Passkey approval, service authentication, and signed receipts | Next |
+| Candidate name and masked-phone reveal | Working after a strong match |
+| Simulated SMS OTP final factor | Working and visibly labeled |
+| OTP expiry, attempt limits, and replay prevention | Working |
+| Same-origin JSON API protection | Working |
+| Real SMS, production enrollment proof, and rate limiting | Not implemented |
 
-The demo intentionally uses the reserved fictional number `+1 202-555-0184`. No SMS provider is contacted. Demo enrollment does not prove ownership of that number.
+## Trust boundary
 
-## Information boundaries
-
-| Actor | Receives | Does not receive |
+| Component | Receives | Does not receive |
 | --- | --- | --- |
-| Relying service | Opaque handle, action result, minimal receipt | Phone, name, birth date, documents, biometrics |
-| GPT-5.6 | Service name and bounded action text | Relay handle, phone, vault data, OTP, receipt authority |
-| Identity vault | User-to-destination encrypted mapping | Action text or model conversation |
-| Human device | Action summary and one-time challenge | Another user's identity or vault record |
+| SQLite profile store | Derived style metrics, encrypted phone, challenge digest | Raw answer sentences |
+| GPT-5.6 Sol | Enrolled vector, returning vector, hashed safety identifier | Name, phone, raw answers, OTP, vault key |
+| Weak-match response | Generic no-match explanation | Candidate identity or device route |
+| Strong-match response | Candidate display name and masked phone | Raw phone number |
+| Notification adapter | Decrypted phone immediately before delivery | Raw answer text or model authority |
 
-Additional controls in the prototype:
+OpenAI requests use the Responses API, Zod Structured Outputs, `store: false`, no tools, bounded numerical input, and a hashed safety identifier. `store: false` is not described as Zero Data Retention. See the official [GPT-5.6 model page](https://developers.openai.com/api/docs/models/gpt-5.6-sol), [Structured Outputs guide](https://developers.openai.com/api/docs/guides/structured-outputs), and [API data controls](https://developers.openai.com/api/docs/guides/your-data).
 
-- likely email addresses, E.164 phone numbers, and dates of birth are rejected before the model call;
-- the model can raise risk but cannot lower the server's medium-risk floor;
-- classifier failure defaults to `high` risk and is exposed as `conservative_fallback`;
-- OTPs are stored as HMAC-SHA-256 digests, expire after five minutes, allow five attempts, and are consumed once;
-- challenge verification and receipt issuance run in one SQLite transaction;
-- public errors and server logs exclude provider details and raw identity data;
-- relay POST routes require same-origin JSON requests;
-- no raw identity documents, face images, fingerprints, voiceprints, or behavioral embeddings are stored.
+## Security limitations
 
-`store: false` is used for OpenAI Responses API calls, but it is not described as Zero Data Retention. Action text must still exclude personal data and secrets. See the official [OpenAI data controls](https://developers.openai.com/api/docs/guides/your-data), [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs), and [latest model guidance](https://developers.openai.com/api/docs/guides/latest-model#update-api-and-model-parameters).
+This is a hackathon research prototype, not production identity proofing.
+
+- Writing style can drift, be imitated, or be sparse. It must not be the only authentication factor.
+- The deterministic vector is deliberately small and explainable; it is not claimed to be a biometric or cryptographic secret.
+- Name and phone are still held by the Authidenty server. The phone is encrypted at rest, but the server and delivery provider must process it.
+- The current demo uses a reserved fictional phone number and simulated delivery. It does not prove phone ownership during enrollment.
+- A real deployment needs account enumeration protection, rate limits, verified enrollment, stronger possession factors such as passkeys, managed key rotation, monitoring, revocation, and independent security review.
+- This prototype recognizes an enrolled account pattern. It does not prove civil identity, legal name, age, or humanness.
 
 ## Stack
 
 - Next.js 16 App Router, React 19, TypeScript, and Tailwind CSS 4
 - SQLite through `better-sqlite3`
-- AES-256-GCM for encrypted contact destinations
-- OpenAI Responses API with GPT-5.6 and Zod Structured Outputs
-- SimpleWebAuthn for the retained passkey registration module
-- Vitest for domain, API, security-boundary, and browser-client contract tests
+- AES-256-GCM for contact encryption
+- HMAC-SHA-256 for one-time-code digests
+- OpenAI Responses API with GPT-5.6 Sol and Zod Structured Outputs
+- SimpleWebAuthn for the retained passkey module
+- Vitest and Chromium browser verification
 
 ## API
 
 | Route | Purpose |
 | --- | --- |
-| `POST /api/relay/demo/setup` | Create a simulated enrollment and return an opaque handle plus masked destination. |
-| `POST /api/relay/requests` | Classify a bounded action, apply server risk policy, and route a challenge. |
-| `POST /api/relay/requests/{requestId}/verify` | Verify the one-time challenge and issue a minimal receipt. |
+| `POST /api/conversation/enroll` | Store a derived response-style profile and encrypted destination. |
+| `POST /api/conversation/match` | Compare new answers, select a candidate, and create a device challenge. |
+| `POST /api/conversation/challenges/{challengeId}/verify` | Verify the one-time device code. |
 
-The earlier passkey registration and recovery exploration remains in the repository under `/api/passkeys/*` and `/api/recovery/agent`, but the Build Week product direction is now the private identity relay. The approved scope and boundaries are in [relay-mvp.md](docs/plan/authidenty-hackathon/relay-mvp.md) and the architecture decision is in [adr-001-private-identity-relay.md](docs/plan/authidenty-hackathon/adr-001-private-identity-relay.md).
+The earlier passkey, recovery-agent, and private-relay explorations remain in the repository as supporting modules and product history. The current decision is documented in [ADR-002](docs/plan/authidenty-hackathon/adr-002-conversational-continuity.md).
 
 ## Run locally
 
@@ -101,19 +104,19 @@ Requirements:
 - Node.js 20.9 or newer
 - npm 10 or newer
 
-Install the exact locked dependencies:
+Install the locked dependencies:
 
 ```bash
 npm ci
 ```
 
-Copy `.env.example` to `.env.local`, then generate two different 32-byte Base64 secrets by running this command twice:
+Copy `.env.example` to `.env.local`. Generate two different 32-byte Base64 secrets by running this command twice:
 
 ```bash
 node -e "console.log(require('node:crypto').randomBytes(32).toString('base64'))"
 ```
 
-Configure the local environment:
+Configure:
 
 ```dotenv
 AUTHIDENTY_DB_PATH=.data/authidenty.db
@@ -124,17 +127,21 @@ AUTHIDENTY_VAULT_KEY_BASE64=<first-generated-value>
 AUTHIDENTY_CHALLENGE_SECRET_BASE64=<second-generated-value>
 ```
 
-Keep all secret values server-side and never commit `.env.local`. `OPENAI_API_KEY` is optional: when it is absent or the classifier fails, Authidenty clearly uses the conservative high-risk fallback.
+Keep every secret server-side and never commit `.env.local`. `OPENAI_API_KEY` is optional: without it, Authidenty uses the deterministic score as a clearly labeled conservative fallback.
 
-Start the development server:
+Start the app:
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). The safe demo values are prefilled; select **Create private route**, **Request private approval**, and **Verify device control** to complete the flow.
+Open [http://localhost:3000](http://localhost:3000). The safe demo values are prefilled. Select:
 
-Run all repository checks:
+1. **Enroll this answer pattern**
+2. **Who do these answers resemble?**
+3. **Verify enrolled device**
+
+Run repository checks:
 
 ```bash
 npm run lint
@@ -142,32 +149,32 @@ npm test
 npm run build
 ```
 
-## What this prototype does not claim
+Final verified state on 2026-07-17:
 
-Authidenty is not civil-identity proofing, bot detection, or conversational biometric matching. It does not infer a person from writing style, recover an account from an embedding, or make SMS stronger than possession of the destination device.
-
-Before production use, the project needs verified enrollment, passkey-based approval, authenticated and rate-limited relying services, managed encryption keys with rotation, a real notification provider, signed receipts, revocation, audit controls, and an independent security review.
+- 74 tests passed across 23 files;
+- production build passed;
+- live GPT-5.6 Sol browser flow returned `201`, `201`, and `200`;
+- browser console errors: zero;
+- live combined match score: 0.92 in the recorded journey.
 
 ## Built with Codex
 
-Codex was used as the implementation partner for the entire Build Week project. It initialized and connected the repository, challenged the original conversational-authentication hypothesis, researched the OpenAI API boundary, documented the product pivot, designed the SQLite schema, wrote security-sensitive behavior test-first, implemented the encrypted vault and relay APIs, built the responsive interface, and exercised the complete browser journey.
+Codex was the implementation partner for the project. It initialized and connected the repository, challenged the authentication hypothesis, researched the security tradeoffs, designed the SQLite migrations and trust boundary, wrote security-sensitive behavior test-first, integrated GPT-5.6, built the responsive interface, diagnosed the first static-looking demo video, and recorded the complete visible browser journey.
 
-The git history preserves the working method:
+The git history preserves the work in small English commits:
 
-1. make one bounded architecture or product decision;
-2. write a failing test before security-sensitive behavior;
-3. implement the smallest passing slice;
-4. verify with tests, lint, build, HTTP responses, and a real Chromium journey;
-5. commit with a small, clear English message.
+1. add the derived conversational profile and OTP invariants;
+2. expose the GPT-guided API boundary;
+3. add the `You Know Me?` working demo;
+4. verify with unit tests, lint, build, live HTTP, Chromium, screenshots, and a narrated video.
 
-The browser verification completed setup, live GPT-5.6 classification, OTP verification, and receipt issuance with API statuses `201`, `201`, and `200`; it also checked desktop and mobile layouts, loaded fonts, and browser console errors. GPT-5.6 is the in-product action classifier. Codex is the coding agent that built and tested the product; their authority is deliberately separate.
+## Submission materials
 
-## Submission Materials
-
-- [Public demo video](https://youtu.be/3Z1c9QdQEPA)
 - [Narrated demo script](docs/demo-script.md)
 - [Devpost submission copy](docs/devpost-submission.md)
 - [Final submission checklist](docs/submission-checklist.md)
+
+The rebuilt video is ready locally and needs a new public YouTube upload before submission. The earlier public relay video is superseded.
 
 ## License
 

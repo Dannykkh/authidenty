@@ -2,10 +2,47 @@
 
 Created: 2026-07-15
 Domain: account authentication and recovery
-Version: v4 private identity relay
+Version: v5 conversational continuity
 Audience: product, engineering, security, and hackathon reviewers
 
-## Core Terms
+## Current Product Terms
+
+### Conversational Continuity Profile
+
+- Definition: a small numerical summary of aggregate response-style features derived from three to six answers.
+- Identifier: `conversationProfile`, with `styleVector` for the serialized feature set.
+- UI: “answer pattern” or “response pattern.”
+- Avoid: “personality,” “biometric key,” or “voiceprint.”
+
+### Candidate Selection
+
+- Definition: the probabilistic step that ranks enrolled profiles and chooses one likely account for a possession challenge.
+- Identifier: `conversationMatch`, `candidate`.
+- UI: “likely candidate.”
+- Avoid: “authenticated user,” “proven identity,” or “confirmed owner.”
+
+### Combined Match Score
+
+- Definition: the server-owned weighted combination of deterministic vector similarity and bounded GPT-5.6 vector analysis.
+- Identifier: `finalScore`.
+- UI: “combined match.”
+- Avoid: “identity confidence” or a claim of statistical calibration.
+
+### Device Proof
+
+- Definition: the independent possession factor that completes verification after Candidate Selection.
+- Identifier: `conversationChallenge`, with `sms_otp` in the current prototype.
+- UI: “enrolled device code.”
+- Avoid: calling the conversational score a factor.
+
+### Weak Match
+
+- Definition: a result below the server threshold that returns no candidate identity, phone suffix, or challenge route.
+- Identifier: `no_match`.
+- UI: “The response pattern was not consistent enough.”
+- Avoid: confirming whether a particular person or phone number is enrolled.
+
+## Supporting and Historical Terms
 
 ### Private Identity Relay
 
@@ -246,7 +283,7 @@ flowchart LR
 
 | Avoid | Use instead | Reason |
 |---|---|---|
-| LLM identifies the person | GPT classifies the approval request | The model does not authenticate or inspect PII |
+| LLM identifies the person | Conversational pattern selects a candidate; device proof verifies | The model does not authenticate or inspect PII |
 | GPT unlocks the phone number | Server policy authorizes private challenge routing | The model cannot access the Identity Vault |
 | phone number is not exposed anywhere | phone number is hidden from the relying service, UI, and model | The vault boundary and carrier still process the destination |
 | AI authentication | GPT-guided recovery | The model does not authenticate |
@@ -259,6 +296,7 @@ flowchart LR
 
 | Date | Change | Reason |
 |---|---|---|
+| 2026-07-17 | v5 added Conversational Continuity terms | Active Build Week demo uses candidate selection plus device proof |
 | 2026-07-16 | v4 added Private Identity Relay terms | Approved pivot from recovery guide to privacy-preserving approval routing |
 | 2026-07-15 | v1 draft with 15 terms | Zephermine spec synthesis |
 | 2026-07-15 | v2 expert merge with 6 terms and refined recovery contracts | Team review |

@@ -4,6 +4,7 @@ These diagrams define the expected process before implementation. Node IDs are s
 
 | Diagram | Purpose | Primary actors |
 |---|---|---|
+| `conversational-continuity.mmd` | Different-question response matching, bounded GPT-5.6 vector comparison, candidate reveal, and OTP device proof | Returning person, Authidenty, GPT-5.6 |
 | `private-identity-relay.mmd` | Opaque approval request, PII-free GPT classification, private challenge routing, OTP verification, and minimal receipt | Relying service, account holder, Authidenty, GPT-5.6 |
 | `passkey-setup-authentication.mmd` | Initial passkey creation, one-time Recovery Code display, and returning-user sign-in | Account holder, browser, Authidenty |
 | `recovery-diagnosis.mmd` | Failure classification, policy projection, GPT guidance, and deterministic fallback | Account holder, Authidenty, GPT-5.6 |
@@ -12,7 +13,8 @@ These diagrams define the expected process before implementation. Node IDs are s
 
 ## Cross-Diagram State Boundaries
 
-- `private-identity-relay.mmd` is the active MVP baseline approved on 2026-07-16. The recovery diagrams remain historical and may supply later passkey-approval components.
+- `conversational-continuity.mmd` is the active Build Week demo baseline approved on 2026-07-17.
+- `private-identity-relay.mmd` remains historical and implemented; the recovery diagrams may supply later passkey components.
 - A relay handle selects one account but does not authenticate it; only successful completion of the configured factor can issue a Verification Receipt.
 - GPT classification cannot call the notification adapter, resolve the Identity Vault, verify a challenge, or issue a receipt.
 

@@ -4,6 +4,8 @@
 - Date: 2026-07-16
 - Decision maker: Project owner
 
+> Historical note: [ADR-002](adr-002-conversational-continuity.md) supersedes this as the active Build Week demo direction. The relay module remains implemented in the repository.
+
 ## Context
 
 The original Authidenty prototype combined passkey registration with GPT-guided account recovery. The project owner identified a broader recurring problem: services and AI agents repeatedly ask people to disclose a phone number, name, or birth date before initiating authentication.

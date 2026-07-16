@@ -4,6 +4,8 @@ Status: Approved implementation baseline
 
 Date: 2026-07-16
 
+> Historical note: [conversational-continuity-mvp.md](conversational-continuity-mvp.md) supersedes this as the active Build Week demo baseline. The relay implementation remains available as supporting product history.
+
 This document supersedes the product outcome in `plan.md` and `spec.md`. Those files remain as historical evidence for the original passkey-recovery direction.
 
 ## Product Statement

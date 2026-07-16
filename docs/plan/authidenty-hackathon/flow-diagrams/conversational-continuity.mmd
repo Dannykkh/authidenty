@@ -1,0 +1,18 @@
+flowchart LR
+    E[Enrollment: name, phone, answers] --> SV[Derive style-v1 vector]
+    SV --> DB[(SQLite profile)]
+    E --> V[AES-256-GCM phone vault]
+    R[Return: different answers] --> CV[Derive candidate vector]
+    DB --> DR[Deterministic ranking]
+    CV --> DR
+    DR --> G[GPT-5.6 Sol compares two vectors]
+    G --> S{Combined score >= 0.72?}
+    S -- No --> N[Generic no match]
+    S -- Yes --> C[Reveal name + masked phone]
+    V --> O[Simulated OTP delivery]
+    C --> O
+    O --> H[Verify HMAC digest]
+    H --> X[Verified enrolled device]
+
+    SV -. raw answers not stored .-> DB
+    G -. no name, phone, raw answers, or OTP .-> G

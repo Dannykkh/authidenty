@@ -1,4 +1,4 @@
-import { PasskeyRegistration } from "@/features/passkeys/components/passkey-registration";
+import { PrivateRelayDemo } from "@/features/relay/components/private-relay-demo";
 
 export default function Home() {
   return (
@@ -17,42 +17,50 @@ export default function Home() {
         </p>
       </header>
 
-      <section
-        id="top"
-        className="mx-auto grid w-full max-w-[90rem] gap-12 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[minmax(0,1.3fr)_minmax(20rem,0.7fr)] lg:gap-20 lg:px-12 lg:py-24"
-      >
-        <div className="reveal flex max-w-5xl flex-col items-start">
+      <section id="top" className="hero-shell">
+        <div className="reveal hero-copy">
           <p className="mb-7 font-mono text-[0.68rem] font-medium uppercase tracking-[0.22em] text-signal">
-            Passkey-first identity / Recovery without ID uploads
+            Private identity relay / GPT-classified human approval
           </p>
 
-          <h1 className="font-display text-[clamp(4rem,10vw,9rem)] leading-[0.82] font-medium tracking-[-0.075em] text-balance">
-            Sign in.
+          <h1 className="font-display text-[clamp(4rem,9vw,8.5rem)] leading-[0.82] font-medium tracking-[-0.075em] text-balance">
+            Approve the action.
             <br />
-            <span className="font-normal italic text-signal">Stay in control.</span>
+            <span className="font-normal italic text-signal">Not your identity.</span>
           </h1>
 
-          <div className="mt-10 grid max-w-3xl gap-7 border-t border-ink/20 pt-7 sm:grid-cols-[1fr_auto] sm:items-end">
+          <div className="hero-deck">
             <p className="max-w-xl text-base leading-7 text-ink/72 sm:text-lg sm:leading-8">
-              Authidenty replaces code typing with device-bound passkeys. When a device
-              disappears, a GPT-5.6 recovery agent explains what failed and guides a secure
-              way back in.
+              Authidenty lets an AI service ask a real person for approval without learning
+              their phone number, name, birth date, document, or biometric. GPT-5.6 explains
+              the action; deterministic code decides whether the enrolled device answered.
             </p>
-            <span className="inline-flex w-fit items-center gap-2 border border-ink bg-ink px-4 py-3 font-mono text-[0.68rem] uppercase tracking-[0.16em] text-paper">
-              Passkeys + recovery guidance live
-              <svg aria-hidden="true" viewBox="0 0 16 16" className="h-3.5 w-3.5 fill-none stroke-current">
-                <path d="M3 8h10M9 4l4 4-4 4" strokeWidth="1.5" />
-              </svg>
-            </span>
           </div>
         </div>
 
-        <PasskeyRegistration />
+        <aside className="reveal reveal-late hero-proof" aria-label="Private relay summary">
+          <p className="eyebrow">Return less</p>
+          <div className="proof-line">
+            <span>Service sends</span>
+            <strong>Action + opaque handle</strong>
+          </div>
+          <div className="proof-line">
+            <span>Person receives</span>
+            <strong>Private device challenge</strong>
+          </div>
+          <div className="proof-line proof-line-result">
+            <span>Service gets back</span>
+            <strong>Purpose-bound receipt</strong>
+          </div>
+          <p className="proof-footnote">No raw identity data crosses back.</p>
+        </aside>
       </section>
 
+      <PrivateRelayDemo />
+
       <footer className="mx-auto flex w-full max-w-[90rem] justify-between border-t border-ink/15 px-5 py-5 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-ink/45 sm:px-8 lg:px-12">
-        <span>Apps for everyday life</span>
-        <span>OpenAI Build Week</span>
+        <span>Apps for everyday life / OpenAI Build Week</span>
+        <span>Prototype boundaries shown honestly</span>
       </footer>
     </main>
   );

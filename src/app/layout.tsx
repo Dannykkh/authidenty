@@ -18,9 +18,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Authidenty | Passkey-first identity",
+  title: "Authidenty | Private identity relay",
   description:
-    "Passkey-first sign-in with guided recovery that keeps identity documents and biometrics out of storage.",
+    "Private human approval for AI services without repeatedly exposing identity data.",
 };
 
 export default function RootLayout({

@@ -164,6 +164,7 @@ The browser verification completed setup, live GPT-5.6 classification, OTP verif
 
 ## Submission Materials
 
+- [Public demo video](https://youtu.be/xtjQFG0Oq2o)
 - [Narrated demo script](docs/demo-script.md)
 - [Devpost submission copy](docs/devpost-submission.md)
 - [Final submission checklist](docs/submission-checklist.md)

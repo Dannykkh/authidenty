@@ -30,9 +30,10 @@ Deadline: July 22, 2026 at 09:00 KST
 - [x] No copyrighted music is included
 - [x] Reserved test data and simulated SMS limitation are visible
 - [x] Thumbnail rendered
-- [ ] Upload video publicly to YouTube
-- [ ] Review YouTube playback and English auto-captions
-- [ ] Paste public YouTube URL into `docs/devpost-submission.md` and Devpost
+- [x] Upload video publicly to YouTube
+- [x] Review YouTube playback and English subtitles
+- [x] Paste public YouTube URL into `docs/devpost-submission.md`
+- [ ] Paste public YouTube URL into Devpost
 
 ## Devpost Fields
 

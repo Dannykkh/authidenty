@@ -7,6 +7,7 @@
 - Format: 1920×1080, H.264 video, AAC audio
 - Language: English
 - Public upload target: YouTube
+- Public video: `https://youtu.be/xtjQFG0Oq2o`
 - Thumbnail: `.termsnap/submission/Authidenty-YouTube-Thumbnail.png`
 
 ## Timeline

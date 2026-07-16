@@ -5,7 +5,7 @@
 - Project name: `Authidenty`
 - Category: `Apps for Your Life`
 - Repository: `https://github.com/Dannykkh/authidenty`
-- Video: `[ADD PUBLIC YOUTUBE URL]`
+- Video: `https://youtu.be/xtjQFG0Oq2o`
 - Codex `/feedback` Session ID: `[ADD SESSION ID]`
 
 ## Tagline

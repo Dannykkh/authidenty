@@ -203,4 +203,59 @@ describe("private identity relay migration", () => {
       database.close();
     }
   });
+
+  test("rejects an unmasked contact destination in the notification outbox", () => {
+    const database = openDatabase(":memory:");
+
+    try {
+      database
+        .prepare(
+          `INSERT INTO users (id, username, display_name, webauthn_user_id)
+           VALUES (?, ?, ?, ?)`,
+        )
+        .run("user-id", "demo@example.com", "Demo User", "A".repeat(43));
+      database
+        .prepare(
+          `INSERT INTO relay_requests
+            (id, user_id, relying_service, summary, purpose, declared_risk,
+             model_risk, final_risk, factor, status, created_at, updated_at, expires_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        )
+        .run(
+          "request-id",
+          "user-id",
+          "OpenClaw",
+          "Approve a test action.",
+          "other",
+          "medium",
+          "high",
+          "high",
+          "sms_otp",
+          "challenge_sent",
+          1_900_000_000,
+          1_900_000_000,
+          1_900_000_300,
+        );
+
+      expect(() =>
+        database
+          .prepare(
+            `INSERT INTO relay_notification_outbox
+              (id, request_id, channel, masked_destination, status, created_at, updated_at)
+             VALUES (?, ?, ?, ?, ?, ?, ?)`,
+          )
+          .run(
+            "notification-id",
+            "request-id",
+            "sms",
+            "+12025550184",
+            "queued",
+            1_900_000_000,
+            1_900_000_000,
+          ),
+      ).toThrow();
+    } finally {
+      database.close();
+    }
+  });
 });

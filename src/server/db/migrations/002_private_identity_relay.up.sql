@@ -90,7 +90,10 @@ CREATE TABLE relay_notification_outbox (
   request_id TEXT NOT NULL UNIQUE,
   channel TEXT NOT NULL CHECK (channel = 'sms'),
   masked_destination TEXT NOT NULL
-    CHECK (length(masked_destination) BETWEEN 4 AND 32),
+    CHECK (
+      length(masked_destination) = 12
+      AND masked_destination GLOB '[*][*][*]-[*][*][*]-[0-9][0-9][0-9][0-9]'
+    ),
   status TEXT NOT NULL DEFAULT 'queued'
     CHECK (status IN ('queued', 'delivered', 'failed')),
   created_at INTEGER NOT NULL DEFAULT (unixepoch()),

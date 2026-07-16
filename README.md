@@ -1,76 +1,97 @@
 # Authidenty
 
-Authidenty is a passkey-first login layer being built with a GPT-5.6 recovery agent. It replaces code-typing fatigue with device-bound credentials and aims to make account recovery understandable without collecting raw identity documents or biometrics.
+Authidenty is a private identity relay for human approval. An AI service can ask an enrolled person to approve an action without repeatedly collecting that person's phone number, legal name, birth date, identity document, or biometric.
 
-This project is being built for OpenAI Build Week in the **Apps for everyday life** category.
+Built for OpenAI Build Week in the **Apps for everyday life** category.
 
-## Why this exists
+## The idea
 
-Identity checks often fail at the worst moment: a phone is lost, a one-time code never arrives, or a recovery flow asks for a photo of an identity document. Our [initial user research](docs/reddit-research/report-2026-07-15.md) found three recurring complaints:
+Sending another SMS is not the innovation. Changing who learns the phone number is.
 
-- repeated authentication interrupts ordinary tasks;
-- losing a device can turn into an account lockout;
-- uploading identity documents or biometric images creates lasting privacy risk.
-
-Authidenty separates authentication from explanation. WebAuthn credentials prove possession of a trusted authenticator. The recovery agent interprets allow-listed failure signals, explains the next safe step, and guides the user toward a permitted recovery path. The model never decides whether a user is the account owner or overrides a failed security check.
-
-## Project status
-
-Passkey registration now works end to end, and the guided recovery conversation is wired to the OpenAI Responses API. The browser creates a credential through WebAuthn, the server verifies the ceremony, and SQLite stores only the reusable public credential fields. When access fails, the recovery panel sends bounded failure context to GPT-5.6 and displays only server-approved next steps.
-
-| Milestone | Status |
-| --- | --- |
-| Next.js, TypeScript, and Tailwind foundation | Complete |
-| Passkey registration | Complete |
-| SQLite credential persistence | Complete |
-| GPT-5.6 recovery-agent route | Complete |
-| Guided recovery conversation | Complete |
-| Passkey sign-in | Next |
-| Cryptographically authorized re-enrollment | Next |
-
-## Intended architecture
+A relying service sends Authidenty an opaque relay handle and a bounded description of the action. GPT-5.6 converts the action into a typed, human-readable purpose and risk suggestion. Server policy chooses the final risk and required factor, Authidenty privately routes a challenge to the enrolled destination, and the service receives a short-lived pseudonymous receipt instead of personal data.
 
 ```text
-Browser authenticator
-        |
-        | WebAuthn ceremony
-        v
-Next.js authentication routes ----> Credential database
-        |
-        | allow-listed failure context, no raw identity evidence
-        v
-GPT-5.6 recovery agent ----> explanation and approved recovery actions
+AI service                    Authidenty                         Human device
+    |                             |                                   |
+    | opaque handle + action      |                                   |
+    |---------------------------->|                                   |
+    |                             | GPT-5.6 classifies action          |
+    |                             | server clamps final risk           |
+    |                             | decrypts route only for delivery   |
+    |                             |----------------------------------->|
+    |                             |          one-time challenge        |
+    |                             |<-----------------------------------|
+    |    minimal receipt          |       deterministic OTP proof      |
+    |<----------------------------|                                   |
 ```
 
-The prototype uses:
+GPT is not the authenticator. It never receives the phone number, opens the vault, sends a challenge, verifies the code, or issues a receipt.
 
-- Next.js 16 with the App Router;
-- React 19 and TypeScript;
-- Tailwind CSS 4;
-- SimpleWebAuthn for passkey ceremonies;
-- SQLite for local credential storage, with a clear path to Postgres;
-- the OpenAI Responses API with [`gpt-5.6`](https://developers.openai.com/api/docs/models/gpt-5.6-sol) for recovery guidance.
+## What works now
 
-Current API routes:
+The current vertical slice runs end to end in the browser:
+
+1. create a demo relay profile with an opaque handle and AES-256-GCM-encrypted phone destination;
+2. submit an action request without personal data;
+3. classify the action with GPT-5.6 Structured Outputs, or use a conservative high-risk fallback when the model is unavailable;
+4. route a simulated SMS challenge while persisting only a masked destination and keyed code digest;
+5. verify the six-digit code with expiry, attempt, and single-use controls;
+6. return a purpose-bound receipt containing a pseudonymous subject, purpose, final risk, factor, issue time, and expiry.
+
+| Capability | Status |
+| --- | --- |
+| Private relay UI and three-route API | Working |
+| Encrypted contact vault | Working |
+| GPT-5.6 action classification | Working with `OPENAI_API_KEY` |
+| Conservative model-failure fallback | Working |
+| Simulated challenge delivery | Working and visibly labeled |
+| Minimal verification receipt | Working |
+| WebAuthn passkey registration module | Retained from the first prototype |
+| Real SMS and enrollment ownership proof | Not implemented |
+| Passkey approval, service authentication, and signed receipts | Next |
+
+The demo intentionally uses the reserved fictional number `+1 202-555-0184`. No SMS provider is contacted. Demo enrollment does not prove ownership of that number.
+
+## Information boundaries
+
+| Actor | Receives | Does not receive |
+| --- | --- | --- |
+| Relying service | Opaque handle, action result, minimal receipt | Phone, name, birth date, documents, biometrics |
+| GPT-5.6 | Service name and bounded action text | Relay handle, phone, vault data, OTP, receipt authority |
+| Identity vault | User-to-destination encrypted mapping | Action text or model conversation |
+| Human device | Action summary and one-time challenge | Another user's identity or vault record |
+
+Additional controls in the prototype:
+
+- likely email addresses, E.164 phone numbers, and dates of birth are rejected before the model call;
+- the model can raise risk but cannot lower the server's medium-risk floor;
+- classifier failure defaults to `high` risk and is exposed as `conservative_fallback`;
+- OTPs are stored as HMAC-SHA-256 digests, expire after five minutes, allow five attempts, and are consumed once;
+- challenge verification and receipt issuance run in one SQLite transaction;
+- public errors and server logs exclude provider details and raw identity data;
+- relay POST routes require same-origin JSON requests;
+- no raw identity documents, face images, fingerprints, voiceprints, or behavioral embeddings are stored.
+
+`store: false` is used for OpenAI Responses API calls, but it is not described as Zero Data Retention. Action text must still exclude personal data and secrets. See the official [OpenAI data controls](https://developers.openai.com/api/docs/guides/your-data), [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs), and [latest model guidance](https://developers.openai.com/api/docs/guides/latest-model#update-api-and-model-parameters).
+
+## Stack
+
+- Next.js 16 App Router, React 19, TypeScript, and Tailwind CSS 4
+- SQLite through `better-sqlite3`
+- AES-256-GCM for encrypted contact destinations
+- OpenAI Responses API with GPT-5.6 and Zod Structured Outputs
+- SimpleWebAuthn for the retained passkey registration module
+- Vitest for domain, API, security-boundary, and browser-client contract tests
+
+## API
 
 | Route | Purpose |
 | --- | --- |
-| `POST /api/passkeys/register/options` | Validate the profile, create an opaque WebAuthn user ID, and issue a short-lived challenge. |
-| `POST /api/passkeys/register/verify` | Consume the one-time challenge, verify the attestation, and store the public credential. |
-| `POST /api/recovery/agent` | Validate an allow-listed failure signal and request structured recovery guidance from GPT-5.6. |
+| `POST /api/relay/demo/setup` | Create a simulated enrollment and return an opaque handle plus masked destination. |
+| `POST /api/relay/requests` | Classify a bounded action, apply server risk policy, and route a challenge. |
+| `POST /api/relay/requests/{requestId}/verify` | Verify the one-time challenge and issue a minimal receipt. |
 
-The recovery request uses Structured Outputs with a Zod schema. It sets `store: false`, sends a privacy-preserving hash as the OpenAI safety identifier, and caps both conversation history and message length. The application does not persist recovery conversation text.
-
-## Security boundaries
-
-- Store public-key credentials and minimal account metadata only.
-- Never store raw identity documents, face images, fingerprints, or voiceprints.
-- Keep the LLM outside the authentication decision.
-- Give the recovery agent structured, allow-listed error context instead of unrestricted logs.
-- Require an independent cryptographic recovery factor before re-enrollment.
-- Record recovery actions without placing secrets or personal evidence in model prompts.
-
-The registration implementation enforces the storage boundary, opaque WebAuthn user IDs, expiring single-use challenges, user verification, and strict relying-party checks. The recovery implementation validates every request and model response, disables response storage, exposes no model tools, and rejects any action outside four server-owned options. Authenticated re-enrollment remains a future requirement; the agent cannot perform it.
+The earlier passkey registration and recovery exploration remains in the repository under `/api/passkeys/*` and `/api/recovery/agent`, but the Build Week product direction is now the private identity relay. The approved scope and boundaries are in [relay-mvp.md](docs/plan/authidenty-hackathon/relay-mvp.md) and the architecture decision is in [adr-001-private-identity-relay.md](docs/plan/authidenty-hackathon/adr-001-private-identity-relay.md).
 
 ## Run locally
 
@@ -79,53 +100,65 @@ Requirements:
 - Node.js 20.9 or newer
 - npm 10 or newer
 
-Install dependencies and start the development server:
+Install the exact locked dependencies:
 
 ```bash
 npm ci
-npm run test
-npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Copy `.env.example` to `.env.local`, then generate two different 32-byte Base64 secrets by running this command twice:
 
-Enter a display name and email address, select **Create passkey**, and approve the prompt from the device. A current browser and a device authenticator such as Windows Hello, Touch ID, or a security key are required.
+```bash
+node -e "console.log(require('node:crypto').randomBytes(32).toString('base64'))"
+```
 
-Development uses safe localhost defaults. To make the relying-party and database configuration explicit, copy `.env.example` to `.env.local`:
+Configure the local environment:
 
 ```dotenv
 AUTHIDENTY_DB_PATH=.data/authidenty.db
 WEBAUTHN_RP_ID=localhost
 WEBAUTHN_ORIGIN=http://localhost:3000
 OPENAI_API_KEY=
+AUTHIDENTY_VAULT_KEY_BASE64=<first-generated-value>
+AUTHIDENTY_CHALLENGE_SECRET_BASE64=<second-generated-value>
 ```
 
-Production requires both WebAuthn values. `WEBAUTHN_ORIGIN` must be HTTPS outside localhost and its hostname must match `WEBAUTHN_RP_ID`.
+Keep all secret values server-side and never commit `.env.local`. `OPENAI_API_KEY` is optional: when it is absent or the classifier fails, Authidenty clearly uses the conservative high-risk fallback.
 
-Set `OPENAI_API_KEY` only in `.env.local` or the deployment environment. Leave it out of browser code and never commit it. Without a key, the recovery panel remains available but returns a clear configuration error instead of making a model request.
+Start the development server:
 
-To try recovery guidance, select **Lost a device or cannot sign in?**, choose a failure type, and describe the problem without entering passwords, PINs, one-time codes, identity document data, biometric data, or recovery-code contents.
+```bash
+npm run dev
+```
 
-Run the current checks:
+Open [http://localhost:3000](http://localhost:3000). The safe demo values are prefilled; select **Create private route**, **Request private approval**, and **Verify device control** to complete the flow.
+
+Run all repository checks:
 
 ```bash
 npm run lint
-npm run test
+npm test
 npm run build
 ```
 
+## What this prototype does not claim
+
+Authidenty is not civil-identity proofing, bot detection, or conversational biometric matching. It does not infer a person from writing style, recover an account from an embedding, or make SMS stronger than possession of the destination device.
+
+Before production use, the project needs verified enrollment, passkey-based approval, authenticated and rate-limited relying services, managed encryption keys with rotation, a real notification provider, signed receipts, revocation, audit controls, and an independent security review.
+
 ## Built with Codex
 
-Codex owns the product implementation for this hackathon. It initialized the Git repository, connected the GitHub remote, generated the Next.js experience, designed the SQLite schema, implemented the registration ceremony and GPT-5.6 recovery route, verified the browser experience, and wrote the project documentation.
+Codex was used as the implementation partner for the entire Build Week project. It initialized and connected the repository, challenged the original conversational-authentication hypothesis, researched the OpenAI API boundary, documented the product pivot, designed the SQLite schema, wrote security-sensitive behavior test-first, implemented the encrypted vault and relay APIs, built the responsive interface, and exercised the complete browser journey.
 
-The working method is intentionally visible in the history:
+The git history preserves the working method:
 
-1. make one bounded change;
-2. start with a failing test for security-sensitive server behavior;
-3. verify it with an external signal such as a test, build, HTTP response, or browser ceremony;
-4. commit it with a clear English message;
-5. add the next product capability.
+1. make one bounded architecture or product decision;
+2. write a failing test before security-sensitive behavior;
+3. implement the smallest passing slice;
+4. verify with tests, lint, build, HTTP responses, and a real Chromium journey;
+5. commit with a small, clear English message.
 
-The current registration flow was checked with unit tests, API smoke tests, and a Chromium virtual WebAuthn authenticator that created and verified a real public-key credential. The recovery flow was checked with policy-boundary tests, request validation tests, TypeScript and lint checks, and desktop and mobile browser runs. A live GPT-5.6 call requires a local API key and is intentionally not simulated as a production result.
+The browser verification completed setup, request creation, OTP verification, and receipt issuance with API statuses `201`, `201`, and `200`; it also checked desktop and mobile layouts, loaded fonts, and browser console errors. GPT-5.6 is the in-product action classifier. Codex is the coding agent that built and tested the product; their authority is deliberately separate.
 
-The runtime recovery agent and the coding agent serve different roles. Codex builds and tests the application. GPT-5.6 powers the in-product recovery conversation.
+Last reviewed: 2026-07-16

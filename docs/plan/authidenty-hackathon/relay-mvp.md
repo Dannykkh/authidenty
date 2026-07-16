@@ -72,6 +72,7 @@ Output:
   "requestId": "req_...",
   "status": "challenge_sent",
   "summary": "OpenClaw wants approval for a saved-supplier transfer.",
+  "classificationSource": "gpt-5.6",
   "finalRisk": "high",
   "factor": "sms_otp",
   "destination": "***-***-0184",
@@ -111,10 +112,10 @@ Output:
 2. Model failure, refusal, timeout, or invalid output defaults to `high` for this first slice.
 3. GPT output is parsed through the server-owned Zod schema and never executed as a command.
 4. The same generic response is used for unknown, disabled, and throttled relay handles where practical.
-5. Request creation and verification are rate-limited by relay handle and client signal.
+5. Production request creation and verification must be authenticated and rate-limited; that infrastructure is deferred from this prototype.
 6. OTPs are random, stored only as keyed digests, expire quickly, permit limited attempts, and are consumed once.
 7. PII never appears in model input, receipt data, public logs, or general repository types.
-8. Only the notification adapter can request decryption of the contact destination.
+8. The relay orchestration layer decrypts the contact destination only immediately before notification and never returns it through repository or public response types.
 
 ## OpenAI Boundary
 

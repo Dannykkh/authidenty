@@ -59,7 +59,7 @@ Deadline: July 22, 2026 at 09:00 KST
 - [x] `.private/`, `.termsnap/`, local databases, screenshots, videos, and secrets are Git-ignored
 - [x] Tracked files and captured logs contain no API-key pattern
 - [x] Re-run all checks after the final documentation changes
-- [ ] Confirm Git worktree is clean and `main` matches `origin/main`
+- [x] Confirm Git worktree is clean and `main` matches `origin/main`
 
 ## Files
 

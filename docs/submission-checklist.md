@@ -34,11 +34,11 @@ Deadline: July 22, 2026 at 09:00 KST
 - [x] Live GPT-5.6 Sol result and OTP verification are visible
 - [x] Reserved test data and simulated SMS limitation are visible
 - [x] Thumbnail rendered from the verified application screen
-- [ ] Upload rebuilt video publicly to YouTube
-- [ ] Upload `Authidenty-You-Know-Me-English.srt`
-- [ ] Review public YouTube playback and captions
-- [ ] Replace `[ADD NEW PUBLIC YOUTUBE URL]` in `docs/devpost-submission.md`
-- [ ] Add the new public URL to README and Devpost
+- [x] Uploaded rebuilt video publicly to YouTube
+- [x] Uploaded `Authidenty-You-Know-Me-English.srt`
+- [x] Verified public availability, 91-second duration, and manual English captions
+- [x] Replaced the placeholder URL in `docs/devpost-submission.md`
+- [x] Added the public URL to README and Devpost submission copy
 
 ## Devpost Fields
 
@@ -48,7 +48,7 @@ Deadline: July 22, 2026 at 09:00 KST
 - [x] Testing instructions ready
 - [ ] Paste the contents of `docs/devpost-submission.md`
 - [ ] Add technologies used
-- [ ] Add the new public YouTube URL
+- [ ] Add the new public YouTube URL to the actual Devpost project
 - [ ] Run `/feedback` in the Codex thread where the core functionality was built
 - [ ] Add the returned Codex Session ID
 - [ ] Preview the public submission page

@@ -9,7 +9,7 @@
 - Format: 1920×1080 H.264 video, AAC stereo audio
 - Language: English
 - Narration: Typecast Sean, `ssfm-v30`, `toneup 0.45`
-- Public video: pending new YouTube upload
+- Public video: `https://youtu.be/_L_XQ3Tj-58`
 - Superseded video: `https://youtu.be/3Z1c9QdQEPA`
 
 ## Timeline

@@ -170,11 +170,12 @@ The git history preserves the work in small English commits:
 
 ## Submission materials
 
+- [Public demo video](https://youtu.be/_L_XQ3Tj-58)
 - [Narrated demo script](docs/demo-script.md)
 - [Devpost submission copy](docs/devpost-submission.md)
 - [Final submission checklist](docs/submission-checklist.md)
 
-The rebuilt video is ready locally and needs a new public YouTube upload before submission. The earlier public relay video is superseded.
+The rebuilt 91-second video is public with manually uploaded English captions. The earlier relay video is superseded.
 
 ## License
 

@@ -5,7 +5,7 @@
 - Project name: `Authidenty: You Know Me?`
 - Category: `Apps for Your Life`
 - Repository: `https://github.com/Dannykkh/authidenty`
-- Video: `[ADD NEW PUBLIC YOUTUBE URL]`
+- Video: `https://youtu.be/_L_XQ3Tj-58`
 - Codex `/feedback` Session ID: `[ADD SESSION ID]`
 
 ## Tagline

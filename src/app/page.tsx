@@ -59,7 +59,7 @@ export default function Home() {
       <PrivateRelayDemo />
 
       <footer className="mx-auto flex w-full max-w-[90rem] justify-between border-t border-ink/15 px-5 py-5 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-ink/45 sm:px-8 lg:px-12">
-        <span>Apps for everyday life / OpenAI Build Week</span>
+        <span>Apps for Your Life / OpenAI Build Week</span>
         <span>Prototype boundaries shown honestly</span>
       </footer>
     </main>

@@ -65,7 +65,7 @@ Deadline: July 22, 2026 at 09:00 KST
 - [x] `.private/`, `.termsnap/`, local databases, screenshots, videos, and secrets are Git-ignored
 - [x] `npm audit` reported zero vulnerabilities
 - [x] Re-ran tests, lint, and build after final documentation changes
-- [ ] Confirm Git worktree is clean and `main` matches `origin/main`
+- [x] Confirmed Git worktree is clean and `main` matches `origin/main`
 
 ## Files
 

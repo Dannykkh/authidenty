@@ -230,6 +230,44 @@ export function createRelayRequest(
   create.immediate();
 }
 
+export function recordRelayNotificationResult(
+  database: Database.Database,
+  requestId: string,
+  status: "delivered" | "failed",
+  now: number,
+) {
+  const record = database.transaction(() => {
+    const result = database
+      .prepare(
+        `UPDATE relay_notification_outbox
+         SET status = ?, delivered_at = ?, updated_at = ?
+         WHERE request_id = ? AND status = 'queued'`,
+      )
+      .run(
+        status,
+        status === "delivered" ? now : null,
+        now,
+        requestId,
+      );
+
+    if (result.changes !== 1) {
+      throw new Error("Relay notification state could not be updated.");
+    }
+
+    if (status === "failed") {
+      database
+        .prepare(
+          `UPDATE relay_requests
+           SET status = 'failed', updated_at = ?
+           WHERE id = ? AND status = 'challenge_sent'`,
+        )
+        .run(now, requestId);
+    }
+  });
+
+  record.immediate();
+}
+
 export function findRelayRequestById(
   database: Database.Database,
   requestId: string,

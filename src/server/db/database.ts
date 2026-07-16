@@ -5,6 +5,7 @@ import { dirname, join } from "node:path";
 const migrations = [
   { version: 1, name: "initial" },
   { version: 2, name: "private_identity_relay" },
+  { version: 3, name: "conversational_continuity" },
 ] as const;
 
 const latestSchemaVersion = migrations.at(-1)?.version ?? 0;

@@ -119,12 +119,14 @@ describe("initial SQLite migration", () => {
   });
 });
 
-describe("private identity relay migration", () => {
+describe("database migrations", () => {
   test("creates separate relay, vault, challenge, outbox, and receipt tables", () => {
     const database = openDatabase(":memory:");
 
     try {
       expect(tableNames(database)).toEqual([
+        "conversation_challenges",
+        "conversation_profiles",
         "identity_vault_entries",
         "passkey_credentials",
         "relay_challenges",
@@ -134,6 +136,33 @@ describe("private identity relay migration", () => {
         "users",
         "verification_receipts",
         "webauthn_challenges",
+      ]);
+      expect(columnNames(database, "conversation_profiles")).toEqual([
+        "user_id",
+        "profile_version",
+        "style_vector",
+        "sample_count",
+        "status",
+        "created_at",
+        "updated_at",
+      ]);
+      expect(columnNames(database, "conversation_challenges")).toEqual([
+        "id",
+        "user_id",
+        "deterministic_score",
+        "model_score",
+        "final_score",
+        "model_source",
+        "explanation",
+        "code_digest",
+        "masked_destination",
+        "status",
+        "attempt_count",
+        "max_attempts",
+        "created_at",
+        "updated_at",
+        "expires_at",
+        "verified_at",
       ]);
       expect(columnNames(database, "identity_vault_entries")).toEqual([
         "user_id",

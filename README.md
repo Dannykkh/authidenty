@@ -170,6 +170,7 @@ The git history preserves the work in small English commits:
 
 ## Submission materials
 
+- [Public Devpost project](https://devpost.com/software/authidenty)
 - [Public demo video](https://youtu.be/_L_XQ3Tj-58)
 - [Narrated demo script](docs/demo-script.md)
 - [Devpost submission copy](docs/devpost-submission.md)

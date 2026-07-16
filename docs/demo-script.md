@@ -10,6 +10,7 @@
 - Language: English
 - Narration: Typecast Sean, `ssfm-v30`, `toneup 0.45`
 - Public video: `https://youtu.be/_L_XQ3Tj-58`
+- Public Devpost project: `https://devpost.com/software/authidenty`
 - Superseded video: `https://youtu.be/3Z1c9QdQEPA`
 
 ## Timeline

@@ -46,13 +46,13 @@ Deadline: July 22, 2026 at 09:00 KST
 - [x] Project description and full Project Story drafted
 - [x] Repository URL ready
 - [x] Testing instructions ready
-- [ ] Paste the contents of `docs/devpost-submission.md`
-- [ ] Add technologies used
-- [ ] Add the new public YouTube URL to the actual Devpost project
-- [ ] Run `/feedback` in the Codex thread where the core functionality was built
-- [ ] Add the returned Codex Session ID
-- [ ] Preview the public submission page
-- [ ] Submit before the deadline
+- [x] Pasted the Project Story into Devpost
+- [x] Added technologies used
+- [x] Added the public YouTube URL to the actual Devpost project
+- [x] Ran `/feedback` in the core Codex thread
+- [x] Added the returned Codex Session ID privately
+- [x] Previewed the public submission page
+- [x] Submitted before the deadline
 
 ## Final Integrity Gate
 
@@ -74,4 +74,5 @@ Deadline: July 22, 2026 at 09:00 KST
 - Thumbnail: `.termsnap/submission/Authidenty-You-Know-Me-Thumbnail.png`
 - Demo script: `docs/demo-script.md`
 - Devpost copy: `docs/devpost-submission.md`
+- Public Devpost project: `https://devpost.com/software/authidenty`
 - Repository: `https://github.com/Dannykkh/authidenty`

@@ -6,7 +6,8 @@
 - Category: `Apps for Your Life`
 - Repository: `https://github.com/Dannykkh/authidenty`
 - Video: `https://youtu.be/_L_XQ3Tj-58`
-- Codex `/feedback` Session ID: `[ADD SESSION ID]`
+- Public project: `https://devpost.com/software/authidenty`
+- Codex `/feedback` Session ID: submitted privately in the Devpost form
 
 ## Tagline
 

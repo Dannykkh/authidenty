@@ -445,6 +445,199 @@ fieldset:disabled textarea {
   resize: vertical;
 }
 
+.conversation-lab {
+  position: relative;
+}
+
+.conversation-ceremony {
+  box-shadow: 0 2rem 6rem oklch(0.19 0.018 67 / 0.08);
+}
+
+.identity-fields {
+  margin-bottom: 2rem;
+}
+
+.question-stack {
+  display: grid;
+  gap: 0;
+  margin-top: 2rem;
+  border-top: 1px solid var(--ink);
+}
+
+.relay-form .question-field {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr);
+  gap: 0.4rem 1rem;
+  padding: 1.25rem 0 1.5rem;
+  border-bottom: 1px solid oklch(0.19 0.018 67 / 0.18);
+  text-transform: none;
+}
+
+.question-number {
+  grid-row: 1 / span 2;
+  padding-top: 0.15rem;
+  color: var(--signal);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+}
+
+.question-copy {
+  max-width: 42rem;
+  color: var(--ink);
+  font-family: var(--font-newsreader), serif;
+  font-size: clamp(1.15rem, 3cqi, 1.65rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.relay-form .question-field textarea {
+  grid-column: 2;
+  min-height: 6rem;
+  margin-top: 0.35rem;
+  border-width: 0 0 1px;
+  padding-inline: 0;
+  background: transparent;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.relay-form .question-field textarea:focus {
+  background: oklch(0.985 0.01 83 / 0.75);
+}
+
+.enrollment-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1.5rem;
+  border-block: 1px solid oklch(0.19 0.018 67 / 0.22);
+}
+
+.enrollment-strip div {
+  min-width: 0;
+  padding: 0.9rem 0.75rem 0.9rem 0;
+}
+
+.enrollment-strip div + div {
+  padding-left: 0.75rem;
+  border-left: 1px solid oklch(0.19 0.018 67 / 0.14);
+}
+
+.enrollment-strip span,
+.enrollment-strip strong {
+  display: block;
+  font-family: var(--font-geist-mono), monospace;
+  text-transform: uppercase;
+}
+
+.enrollment-strip span {
+  color: oklch(0.19 0.018 67 / 0.48);
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+}
+
+.enrollment-strip strong {
+  margin-top: 0.35rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+}
+
+.identity-reveal {
+  display: grid;
+  gap: 1.75rem;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border: 1px solid var(--ink);
+  background:
+    linear-gradient(
+      135deg,
+      oklch(0.62 0.22 34 / 0.1),
+      transparent 52%
+    ),
+    var(--paper);
+}
+
+.identity-reveal-lead > span,
+.identity-reveal dt {
+  color: oklch(0.19 0.018 67 / 0.52);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.identity-reveal-lead > strong {
+  display: block;
+  margin-top: 0.55rem;
+  font-family: var(--font-newsreader), serif;
+  font-size: clamp(3rem, 10cqi, 6.5rem);
+  font-weight: 500;
+  letter-spacing: -0.065em;
+  line-height: 0.85;
+}
+
+.identity-reveal-lead > p {
+  margin-top: 1rem;
+  color: var(--signal);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.78rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.identity-reveal dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  border-top: 1px solid oklch(0.19 0.018 67 / 0.18);
+}
+
+.identity-reveal dl div {
+  min-width: 0;
+  padding: 0.9rem 0.75rem 0 0;
+}
+
+.identity-reveal dl div + div {
+  padding-left: 0.75rem;
+  border-left: 1px solid oklch(0.19 0.018 67 / 0.14);
+}
+
+.identity-reveal dd {
+  margin: 0.4rem 0 0;
+  overflow-wrap: anywhere;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.72rem;
+  font-weight: 650;
+  text-transform: uppercase;
+}
+
+.pattern-explanation {
+  margin: 1.5rem 0 0;
+  padding: 0 0 0 1.25rem;
+  border-left: 3px solid var(--signal);
+}
+
+.pattern-explanation span {
+  color: oklch(0.19 0.018 67 / 0.5);
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.pattern-explanation p {
+  max-width: 42rem;
+  margin-top: 0.55rem;
+  font-family: var(--font-newsreader), serif;
+  font-size: clamp(1.25rem, 4cqi, 2rem);
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
 .relay-form input:focus,
 .relay-form select:focus,
 .relay-form textarea:focus {
@@ -862,6 +1055,22 @@ fieldset:disabled textarea {
   .receipt-grid div:nth-child(even) {
     padding-left: 0;
     border-left: 0;
+  }
+
+  .enrollment-strip,
+  .identity-reveal dl {
+    grid-template-columns: 1fr;
+  }
+
+  .enrollment-strip div + div,
+  .identity-reveal dl div + div {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid oklch(0.19 0.018 67 / 0.12);
+  }
+
+  .relay-form .question-field {
+    grid-template-columns: 1.8rem minmax(0, 1fr);
   }
 }
 

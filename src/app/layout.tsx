@@ -18,9 +18,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Authidenty | Private identity relay",
+  title: "Authidenty | You Know Me?",
   description:
-    "Private human approval for AI services without repeatedly exposing identity data.",
+    "Conversational continuity selects a likely identity; an enrolled device proves it.",
 };
 
 export default function RootLayout({

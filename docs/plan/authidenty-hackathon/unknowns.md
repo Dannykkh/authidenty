@@ -2,7 +2,7 @@
 
 ## Known Knowns
 
-- Authidenty is an OpenAI Build Week prototype in the Apps for everyday life category.
+- Authidenty is an OpenAI Build Week prototype in the Apps for Your Life category.
 - Passkey registration, SQLite public-credential storage, and bounded GPT-5.6 guidance already work.
 - The model cannot authenticate, authorize recovery, issue a session, verify a secret, revoke a credential, or approve re-enrollment.
 - The product will not collect raw identity documents, biometric samples, or conversational identity profiles.

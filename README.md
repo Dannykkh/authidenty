@@ -2,7 +2,7 @@
 
 Authidenty is a private identity relay for human approval. An AI service can ask an enrolled person to approve an action without repeatedly collecting that person's phone number, legal name, birth date, identity document, or biometric.
 
-Built for OpenAI Build Week in the **Apps for everyday life** category.
+Built for OpenAI Build Week in the **Apps for Your Life** category.
 
 ## The idea
 
@@ -43,6 +43,7 @@ The current vertical slice runs end to end in the browser:
 | Private relay UI and three-route API | Working |
 | Encrypted contact vault | Working |
 | GPT-5.6 action classification | Working with `OPENAI_API_KEY` |
+| Live GPT-5.6 browser verification | Complete |
 | Conservative model-failure fallback | Working |
 | Simulated challenge delivery | Working and visibly labeled |
 | Minimal verification receipt | Working |
@@ -159,6 +160,16 @@ The git history preserves the working method:
 4. verify with tests, lint, build, HTTP responses, and a real Chromium journey;
 5. commit with a small, clear English message.
 
-The browser verification completed setup, request creation, OTP verification, and receipt issuance with API statuses `201`, `201`, and `200`; it also checked desktop and mobile layouts, loaded fonts, and browser console errors. GPT-5.6 is the in-product action classifier. Codex is the coding agent that built and tested the product; their authority is deliberately separate.
+The browser verification completed setup, live GPT-5.6 classification, OTP verification, and receipt issuance with API statuses `201`, `201`, and `200`; it also checked desktop and mobile layouts, loaded fonts, and browser console errors. GPT-5.6 is the in-product action classifier. Codex is the coding agent that built and tested the product; their authority is deliberately separate.
 
-Last reviewed: 2026-07-16
+## Submission Materials
+
+- [Narrated demo script](docs/demo-script.md)
+- [Devpost submission copy](docs/devpost-submission.md)
+- [Final submission checklist](docs/submission-checklist.md)
+
+## License
+
+Authidenty is available under the [MIT License](LICENSE).
+
+Last reviewed: 2026-07-17

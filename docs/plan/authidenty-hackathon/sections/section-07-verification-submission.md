@@ -106,7 +106,7 @@ Capture at minimum:
 
 Update the English README with:
 
-- problem and “Apps for everyday life” fit;
+- problem and `Apps for Your Life` fit;
 - complete working journey;
 - architecture diagram and deterministic authorization boundary;
 - exact GPT-5.6 contribution and fallback behavior;

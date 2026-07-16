@@ -2,24 +2,25 @@
 
 ## Export
 
-- File: `.termsnap/submission/Authidenty-OpenAI-Build-Week.mp4`
-- Duration: 1 minute 52 seconds
+- File: `.termsnap/submission/Authidenty-OpenAI-Build-Week-Typecast.mp4`
+- Duration: 1 minute 26 seconds
 - Format: 1920×1080, H.264 video, AAC audio
 - Language: English
+- Narration: Typecast Sean, `ssfm-v30`
 - Public upload target: YouTube
-- Public video: `https://youtu.be/xtjQFG0Oq2o`
-- Thumbnail: `.termsnap/submission/Authidenty-YouTube-Thumbnail.png`
+- Public video: `https://youtu.be/3Z1c9QdQEPA`
+- Thumbnail: `.termsnap/submission/Authidenty-YouTube-Thumbnail-Typecast.png`
 
 ## Timeline
 
 | Time | Visual | Narration purpose |
 | --- | --- | --- |
-| 00:00–00:12 | Product hook | Explain repeated identity-data collection |
-| 00:12–00:24 | Information boundary | Introduce the private identity relay |
-| 00:24–01:00 | Live browser walkthrough | Create route, classify with GPT-5.6, verify device control |
-| 01:00–01:20 | Security boundary | Separate model explanation from deterministic authorization |
-| 01:20–01:42 | Built with Codex | Explain Codex's product, engineering, and verification contribution |
-| 01:42–01:52 | Closing receipt | Restate the product principle and repository URL |
+| 00:00–00:10 | Product hook | Explain repeated identity-data collection |
+| 00:10–00:19 | Information boundary | Introduce the private identity relay |
+| 00:19–00:56 | Live browser walkthrough | Create route, classify with GPT-5.6, verify device control |
+| 00:56–01:03 | Security boundary | Separate model explanation from deterministic authorization |
+| 01:03–01:19 | Built with Codex | Explain Codex's product, engineering, and verification contribution |
+| 01:19–01:26 | Closing receipt | Restate the product principle and repository URL |
 
 ## Narration
 

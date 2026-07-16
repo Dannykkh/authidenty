@@ -64,8 +64,9 @@ Deadline: July 22, 2026 at 09:00 KST
 
 ## Files
 
-- Final video: `.termsnap/submission/Authidenty-OpenAI-Build-Week.mp4`
-- Thumbnail: `.termsnap/submission/Authidenty-YouTube-Thumbnail.png`
+- Final video: `.termsnap/submission/Authidenty-OpenAI-Build-Week-Typecast.mp4`
+- English subtitles: `.termsnap/submission/Authidenty-English-Typecast.srt`
+- Thumbnail: `.termsnap/submission/Authidenty-YouTube-Thumbnail-Typecast.png`
 - Demo script: `docs/demo-script.md`
 - Devpost copy: `docs/devpost-submission.md`
 - Repository: `https://github.com/Dannykkh/authidenty`

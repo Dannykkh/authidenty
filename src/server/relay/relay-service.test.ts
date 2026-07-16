@@ -89,6 +89,7 @@ describe("private identity relay service", () => {
         requestId: "request_0123456789abcdefghijkl",
         status: "challenge_sent",
         summary: "OpenClaw requests approval for a saved-supplier transfer.",
+        classificationSource: "gpt-5.6",
         finalRisk: "high",
         factor: "sms_otp",
         destination: "***-***-0184",
@@ -187,6 +188,7 @@ describe("private identity relay service", () => {
       );
 
       expect(created.finalRisk).toBe("high");
+      expect(created.classificationSource).toBe("conservative_fallback");
       expect(created.summary).toBe(
         "OpenClaw requests approval for an action that requires review.",
       );

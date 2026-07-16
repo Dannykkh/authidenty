@@ -43,6 +43,7 @@ describe("private relay HTTP handlers", () => {
       requestId: "request_0123456789abcdefghijkl",
       status: "challenge_sent" as const,
       summary: "Approve a test action.",
+      classificationSource: "gpt-5.6" as const,
       finalRisk: "high" as const,
       factor: "sms_otp" as const,
       destination: "***-***-0184",
@@ -91,6 +92,7 @@ describe("private relay HTTP handlers", () => {
       destination: "***-***-0184",
     });
     await expect(requestResponse.json()).resolves.toMatchObject({
+      classificationSource: "gpt-5.6",
       demoCode: "184205",
       finalRisk: "high",
     });

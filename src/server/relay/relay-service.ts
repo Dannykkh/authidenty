@@ -181,6 +181,7 @@ export async function createRelayApprovalRequest(
   }
 
   let classification: RelayActionClassification;
+  let classificationSource: "gpt-5.6" | "conservative_fallback" = "gpt-5.6";
 
   try {
     classification = await dependencies.classifier.classify({
@@ -190,6 +191,7 @@ export async function createRelayApprovalRequest(
     });
   } catch {
     classification = fallbackClassification(request.serviceName);
+    classificationSource = "conservative_fallback";
   }
 
   const encryptedPhone = findEncryptedPhoneByUserId(database, profile.userId);
@@ -272,6 +274,7 @@ export async function createRelayApprovalRequest(
     requestId,
     status: "challenge_sent" as const,
     summary: classification.summary,
+    classificationSource,
     finalRisk,
     factor: "sms_otp" as const,
     destination,
